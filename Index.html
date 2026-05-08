@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PulseFrame List</title>
 
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>PULSEFRAME LIST</h1>
+    <p class="subtitle">Track your ascent through Geometry Dash progression</p>
+
+    <div class="card">
+
+      <h2>Skill Radar</h2>
+
+      <div class="sliders">
+
+        <div class="slider-group">
+          <label>Cube</label>
+          <input type="range" min="0" max="100" value="50" id="cube">
+          <span id="cubeValue">50</span>
+        </div>
+
+        <div class="slider-group">
+          <label>Ship</label>
+          <input type="range" min="0" max="100" value="50" id="ship">
+          <span id="shipValue">50</span>
+        </div>
+
+        <div class="slider-group">
+          <label>Ball</label>
+          <input type="range" min="0" max="100" value="50" id="ball">
+          <span id="ballValue">50</span>
+        </div>
+
+        <div class="slider-group">
+          <label>UFO</label>
+          <input type="range" min="0" max="100" value="50" id="ufo">
+          <span id="ufoValue">50</span>
+        </div>
+
+        <div class="slider-group">
+          <label>Wave</label>
+          <input type="range" min="0" max="100" value="50" id="wave">
+          <span id="waveValue">50</span>
+        </div>
+
+        <div class="slider-group">
+          <label>Robot</label>
+          <input type="range" min="0" max="100" value="50" id="robot">
+          <span id="robotValue">50</span>
+        </div>
+
+        <div class="slider-group">
+          <label>Spider</label>
+          <input type="range" min="0" max="100" value="50" id="spider">
+          <span id="spiderValue">50</span>
+        </div>
+
+      </div>
+
+      <canvas id="skillChart"></canvas>
+
+      <button onclick="generateRecommendations()">
+        Generate Progression Path
+      </button>
+
+      <div id="recommendations"></div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
