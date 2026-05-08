@@ -1,12 +1,152 @@
-.rec {
-  margin-top: 15px;
-  padding: 15px;
-  border-left: 4px solid cyan;
-  background: #1a1a1a;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.1);
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+
+  /* deep GD-style background */
+  background: radial-gradient(circle at top, #0a0f1f 0%, #05070f 60%, #02030a 100%);
+}
+
+/* ===== TITLE SECTION ===== */
+.title-wrap {
+  position: relative;
+  text-align: center;
+  margin: 20px 0 30px;
+}
+
+/* faint GD icon behind title */
+.title-wrap::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  opacity: 0.08;
+
+  background-image: url("https://upload.wikimedia.org/wikipedia/en/3/3f/Geometry_Dash_Icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  filter: blur(1px);
+  z-index: 0;
 }
 
 h1 {
-  letter-spacing: 3px;
+  position: relative;
+  z-index: 1;
+  color: #00e5ff;
+  letter-spacing: 4px;
+  text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
 }
+
+/* ===== LAYOUT ===== */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 0;
+}
+
+.subtitle {
+  text-align: center;
+  color: #8aa;
+  margin-bottom: 20px;
+}
+
+/* ===== MAIN CARD ===== */
+.card {
+  background: rgba(15, 20, 40, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.08);
+  border-radius: 16px;
+  padding: 25px;
+}
+
+/* ===== SLIDERS ===== */
+.slider-group {
+  margin-bottom: 10px;
+}
+
+input[type=range] {
+  width: 60%;
+}
+
+span {
+  color: #00e5ff;
+  margin-left: 10px;
+}
+
+/* ===== BUTTON ===== */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+
+  background: linear-gradient(90deg, #00e5ff, #0066ff);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,229,255,0.2);
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+/* ===== RECOMMENDATIONS ===== */
+#recommendations {
+  margin-top: 20px;
+}
+
+.rec {
+  background: rgba(20, 25, 45, 0.8);
+  padding: 12px;
+  margin-top: 10px;
+  border-left: 4px solid #00e5ff;
+  border-radius: 10px;
+}
+
+/* ===== TIER GRID ===== */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.tier {
+  background: rgba(20, 25, 45, 0.6);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: 0.2s;
+}
+
+.tier:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0,229,255,0.1);
+}
+
+.tier h3 {
+  margin: 0;
+  color: #00e5ff;
+}
+
+.tier p {
+  margin: 5px 0 0;
+  color: #aaa;
+  font-size: 13px;
+}
+
+/* tier colors */
+.easy { border-left: 4px solid #4cff4c; }
+.beginner { border-left: 4px solid #7dffb2; }
+.expert { border-left: 4px solid #ffd24c; }
+.medium { border-left: 4px solid #ff7a4c; }
+.all { border-left: 4px solid #ff3b3b; }
