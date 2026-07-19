@@ -1,32 +1,147 @@
-.rank-icon {
-    width: 80px;
-    height: 80px;
-    transition: 0.3s ease;
+body {
+
+background:#101010;
+color:white;
+font-family:Arial, sans-serif;
+
 }
 
-.beginner {
-    filter:
-        hue-rotate(90deg)
-        drop-shadow(0 0 12px #4dff4d);
+
+header {
+
+padding:20px;
+background:#151f18;
+display:flex;
+justify-content:space-between;
+align-items:center;
+
 }
 
-.experienced {
-    filter:
-        hue-rotate(35deg)
-        drop-shadow(0 0 12px #ffd54d);
+
+h1 {
+
+color:#00ff66;
+
 }
 
-.listgrinder {
-    filter:
-        hue-rotate(5deg)
-        drop-shadow(0 0 12px #ff8c1a);
+
+nav a {
+
+margin:15px;
+color:white;
+cursor:pointer;
+
 }
 
-.toplist {
-    filter:
-        drop-shadow(0 0 18px #ff3030);
+
+
+.tracker {
+
+margin:20px;
+padding:20px;
+background:#17251b;
+border-radius:15px;
+
 }
 
-.rank-icon:hover{
-    transform: scale(1.1);
+
+.progress-text {
+
+text-align:center;
+font-size:25px;
+color:#4cff70;
+
+}
+
+
+.bar {
+
+height:20px;
+background:#222;
+border-radius:10px;
+
+}
+
+
+.fill {
+
+height:100%;
+width:0%;
+background:#4cff70;
+border-radius:10px;
+
+}
+
+
+
+
+.rank {
+
+margin:25px;
+padding:25px;
+border-radius:20px;
+background:#161616;
+
+}
+
+
+.rank img {
+
+width:90px;
+filter:drop-shadow(0 0 15px);
+
+}
+
+
+
+.level {
+
+padding:15px;
+margin:10px;
+background:#222;
+border-radius:10px;
+
+}
+
+
+.level:hover {
+
+transform:scale(1.03);
+background:#333;
+
+}
+
+
+
+/* Rank colors */
+
+.beginner img {
+
+filter:
+drop-shadow(0 0 20px lime);
+
+}
+
+
+.experienced img {
+
+filter:
+drop-shadow(0 0 20px gold);
+
+}
+
+
+.grinder img {
+
+filter:
+drop-shadow(0 0 20px orange);
+
+}
+
+
+.top img {
+
+filter:
+drop-shadow(0 0 25px red);
+
 }
