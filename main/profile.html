@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Profile - PulseFrame</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚡ Pulse<span>Frame</span></div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="rankings.html">Rankings</a>
+        <a href="progression.html">Progression</a>
+        <a href="levels.html">Levels</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+</header>
+
+<main class="hero">
+
+    <h1>Your <span>Profile</span></h1>
+
+    <p>
+        Connect your Discord account to create your PulseFrame player profile.
+    </p>
+
+    <br>
+
+    <button id="discord-login">
+        Connect Discord
+    </button>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    const SUPABASE_URL = "YOUR_SUPABASE_URL";
+    const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+    const supabase = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+    document.getElementById("discord-login").addEventListener("click", async () => {
+
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "discord",
+            options: {
+                redirectTo: window.location.href
+            }
+        });
+
+        if (error) {
+            alert(error.message);
+        }
+    });
+</script>
+
+</body>
+</html>
