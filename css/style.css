@@ -1,147 +1,917 @@
-body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PulseFrame List</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080a10;
+            color: #f1f4ff;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #0d1019;
+            border-bottom: 1px solid #202637;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #5ecbff;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #aeb6c9;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            max-width: 1200px;
+            margin: 45px auto 30px;
+            padding: 0 25px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: #5ecbff;
+        }
+
+        .hero p {
+            color: #929bad;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           MAIN GRID
+        ========================= */
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 25px 60px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #10141e;
+            border: 1px solid #222a3b;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 18px;
+        }
+
+        .subtitle {
+            color: #7f899d;
+            font-size: 13px;
+            margin-top: -10px;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           PLAYER RANKINGS
+        ========================= */
+
+        .player {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 10px;
+            border-bottom: 1px solid #1e2533;
+        }
+
+        .player:last-child {
+            border-bottom: none;
+        }
+
+        .placement {
+            width: 35px;
+            font-weight: 800;
+            color: #7e899e;
+        }
+
+        .player:nth-child(2) .placement {
+            color: #ffd75e;
+        }
+
+        .player:nth-child(3) .placement {
+            color: #cbd2dd;
+        }
+
+        .player:nth-child(4) .placement {
+            color: #cd8d5c;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #1c2637;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-weight: 700;
+        }
+
+        .player-rank {
+            color: #788398;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .rating {
+            font-weight: 800;
+            color: #5ecbff;
+        }
+
+        /* =========================
+           SKILL SETS
+        ========================= */
+
+        .skill {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0c1018;
+            border: 1px solid #1c2433;
+            padding: 13px;
+            border-radius: 9px;
+            margin-bottom: 9px;
+        }
+
+        .skill-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-icon {
+            font-size: 20px;
+            width: 28px;
+            text-align: center;
+        }
+
+        .skill-name {
+            font-weight: 700;
+        }
+
+        .skill-rank {
+            font-size: 12px;
+            color: #8994a8;
+            margin-top: 2px;
+        }
+
+        .skill-position {
+            font-weight: 800;
+            color: #5ecbff;
+        }
+
+        /* =========================
+           PROGRESSION
+        ========================= */
+
+        .progress-section {
+            margin-top: 20px;
+        }
+
+        .progress-tier {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px;
+            margin-bottom: 9px;
+            border-radius: 9px;
+            background: #0c1018;
+            border: 1px solid #1c2433;
+        }
+
+        .tier-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #182030;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+        }
+
+        .tier-info {
+            flex: 1;
+        }
+
+        .tier-name {
+            font-weight: 700;
+        }
+
+        .tier-description {
+            font-size: 12px;
+            color: #7f899d;
+            margin-top: 3px;
+        }
+
+        .tier-status {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .completed {
+            color: #62dc91;
+        }
+
+        .current {
+            color: #5ecbff;
+        }
+
+        /* =========================
+           RECOMMENDATIONS
+        ========================= */
+
+        .recommendation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 9px;
+            background: #0c1018;
+            border: 1px solid #1c2433;
+        }
+
+        .level-name {
+            font-weight: 700;
+        }
+
+        .level-info {
+            color: #7f899d;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .difficulty {
+            padding: 5px 9px;
+            border-radius: 6px;
+            background: #172232;
+            color: #5ecbff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           EXTERNAL LISTS
+        ========================= */
+
+        .external {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 5px;
+            border-bottom: 1px solid #1e2533;
+        }
+
+        .external:last-child {
+            border-bottom: none;
+        }
+
+        .external-name {
+            font-weight: 700;
+        }
+
+        .external-rank {
+            font-weight: 800;
+            color: #cbd2dd;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #202637;
+            background: #0b0e15;
+            text-align: center;
+            padding: 25px;
+            color: #657087;
+            font-size: 12px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        ⚡ <span>PulseFrame</span> List
+    </div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#rankings">Rankings</a>
+        <a href="#progression">Progression</a>
+        <a href="#levels">Levels</a>
+        <a href="#profile">Profile</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <h1>Geometry Dash <span>Skill Rankings</span></h1>
+
+    <p>
+        PulseFrame is a skill-based Geometry Dash ranking and progression
+        system. Compare players, measure individual game-mode skill,
+        and discover levels designed to improve your weakest areas.
+    </p>
 
-background:#101010;
-color:white;
-font-family:Arial, sans-serif;
+</section>
 
-}
 
+<main class="container">
 
-header {
+    <div class="grid">
 
-padding:20px;
-background:#151f18;
-display:flex;
-justify-content:space-between;
-align-items:center;
+        <!-- OVERALL RANKINGS -->
 
-}
+        <section class="card" id="rankings">
 
+            <h2>🏆 PulseFrame Overall</h2>
 
-h1 {
+            <p class="subtitle">
+                Top players ranked by overall PulseFrame skill.
+            </p>
 
-color:#00ff66;
+            <div class="player">
 
-}
+                <div class="placement">#1</div>
 
+                <div class="avatar">👑</div>
 
-nav a {
+                <div class="player-info">
+                    <div class="player-name">PlayerOne</div>
+                    <div class="player-rank">Pro</div>
+                </div>
 
-margin:15px;
-color:white;
-cursor:pointer;
+                <div class="rating">9,842</div>
 
-}
+            </div>
 
 
+            <div class="player">
 
-.tracker {
+                <div class="placement">#2</div>
 
-margin:20px;
-padding:20px;
-background:#17251b;
-border-radius:15px;
+                <div class="avatar">⚡</div>
 
-}
+                <div class="player-info">
+                    <div class="player-name">PlayerTwo</div>
+                    <div class="player-rank">Pro</div>
+                </div>
 
+                <div class="rating">9,611</div>
 
-.progress-text {
+            </div>
 
-text-align:center;
-font-size:25px;
-color:#4cff70;
 
-}
+            <div class="player">
 
+                <div class="placement">#3</div>
 
-.bar {
+                <div class="avatar">🔥</div>
 
-height:20px;
-background:#222;
-border-radius:10px;
+                <div class="player-info">
+                    <div class="player-name">PlayerThree</div>
+                    <div class="player-rank">Experienced</div>
+                </div>
 
-}
+                <div class="rating">9,402</div>
 
+            </div>
 
-.fill {
 
-height:100%;
-width:0%;
-background:#4cff70;
-border-radius:10px;
+            <div class="player">
 
-}
+                <div class="placement">#4</div>
 
+                <div class="avatar">🌊</div>
 
+                <div class="player-info">
+                    <div class="player-name">PlayerFour</div>
+                    <div class="player-rank">Experienced</div>
+                </div>
 
+                <div class="rating">9,210</div>
 
-.rank {
+            </div>
 
-margin:25px;
-padding:25px;
-border-radius:20px;
-background:#161616;
 
-}
+            <div class="player">
 
+                <div class="placement">#5</div>
 
-.rank img {
+                <div class="avatar">💠</div>
 
-width:90px;
-filter:drop-shadow(0 0 15px);
+                <div class="player-info">
+                    <div class="player-name">PlayerFive</div>
+                    <div class="player-rank">Experienced</div>
+                </div>
 
-}
+                <div class="rating">9,021</div>
 
+            </div>
 
+        </section>
 
-.level {
 
-padding:15px;
-margin:10px;
-background:#222;
-border-radius:10px;
+        <!-- BEST SKILL SETS -->
 
-}
+        <section class="card">
 
+            <h2>🎮 Best Skill Sets</h2>
 
-.level:hover {
+            <p class="subtitle">
+                Top player for each game mode.
+            </p>
 
-transform:scale(1.03);
-background:#333;
 
-}
+            <div class="skill">
 
+                <div class="skill-left">
+                    <div class="skill-icon">🌊</div>
 
+                    <div>
+                        <div class="skill-name">Wave</div>
+                        <div class="skill-rank">PlayerOne</div>
+                    </div>
+                </div>
 
-/* Rank colors */
+                <div class="skill-position">#1</div>
 
-.beginner img {
+            </div>
 
-filter:
-drop-shadow(0 0 20px lime);
 
-}
+            <div class="skill">
 
+                <div class="skill-left">
+                    <div class="skill-icon">🚀</div>
 
-.experienced img {
+                    <div>
+                        <div class="skill-name">Ship</div>
+                        <div class="skill-rank">PlayerTwo</div>
+                    </div>
+                </div>
 
-filter:
-drop-shadow(0 0 20px gold);
+                <div class="skill-position">#1</div>
 
-}
+            </div>
 
 
-.grinder img {
+            <div class="skill">
 
-filter:
-drop-shadow(0 0 20px orange);
+                <div class="skill-left">
+                    <div class="skill-icon">🕷️</div>
 
-}
+                    <div>
+                        <div class="skill-name">Spider</div>
+                        <div class="skill-rank">PlayerFive</div>
+                    </div>
+                </div>
 
+                <div class="skill-position">#1</div>
 
-.top img {
+            </div>
 
-filter:
-drop-shadow(0 0 25px red);
 
-}
+            <div class="skill">
+
+                <div class="skill-left">
+                    <div class="skill-icon">🛸</div>
+
+                    <div>
+                        <div class="skill-name">UFO</div>
+                        <div class="skill-rank">PlayerThree</div>
+                    </div>
+                </div>
+
+                <div class="skill-position">#1</div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-left">
+                    <div class="skill-icon">⚽</div>
+
+                    <div>
+                        <div class="skill-name">Ball</div>
+                        <div class="skill-rank">PlayerFour</div>
+                    </div>
+                </div>
+
+                <div class="skill-position">#1</div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-left">
+                    <div class="skill-icon">🤖</div>
+
+                    <div>
+                        <div class="skill-name">Robot</div>
+                        <div class="skill-rank">PlayerOne</div>
+                    </div>
+                </div>
+
+                <div class="skill-position">#1</div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-left">
+                    <div class="skill-icon">🔄</div>
+
+                    <div>
+                        <div class="skill-name">Swing</div>
+                        <div class="skill-rank">PlayerTwo</div>
+                    </div>
+                </div>
+
+                <div class="skill-position">#1</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROGRESSION -->
+
+        <section class="card" id="progression">
+
+            <h2>📈 Skill Progression</h2>
+
+            <p class="subtitle">
+                Six PulseFrame skill tiers.
+            </p>
+
+
+            <div class="progress-tier">
+
+                <div class="tier-number">1</div>
+
+                <div class="tier-info">
+                    <div class="tier-name">Beginner</div>
+                    <div class="tier-description">
+                        Learning the fundamentals.
+                    </div>
+                </div>
+
+                <div class="tier-status completed">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <div class="progress-tier">
+
+                <div class="tier-number">2</div>
+
+                <div class="tier-info">
+                    <div class="tier-name">Average</div>
+                    <div class="tier-description">
+                        Typical player ability.
+                    </div>
+                </div>
+
+                <div class="tier-status completed">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <div class="progress-tier">
+
+                <div class="tier-number">3</div>
+
+                <div class="tier-info">
+                    <div class="tier-name">Midrange</div>
+                    <div class="tier-description">
+                        Noticeably above basic ability.
+                    </div>
+                </div>
+
+                <div class="tier-status completed">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <div class="progress-tier">
+
+                <div class="tier-number">4</div>
+
+                <div class="tier-info">
+                    <div class="tier-name">Above Average</div>
+                    <div class="tier-description">
+                        Consistently strong gameplay.
+                    </div>
+                </div>
+
+                <div class="tier-status current">
+                    CURRENT
+                </div>
+
+            </div>
+
+
+            <div class="progress-tier">
+
+                <div class="tier-number">5</div>
+
+                <div class="tier-info">
+                    <div class="tier-name">Experienced</div>
+                    <div class="tier-description">
+                        Highly developed game-mode skill.
+                    </div>
+                </div>
+
+                <div class="tier-status">
+                    🔒
+                </div>
+
+            </div>
+
+
+            <div class="progress-tier">
+
+                <div class="tier-number">6</div>
+
+                <div class="tier-info">
+                    <div class="tier-name">Pro</div>
+                    <div class="tier-description">
+                        Exceptional mastery.
+                    </div>
+                </div>
+
+                <div class="tier-status">
+                    🔒
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECOMMENDATIONS -->
+
+        <section class="card" id="levels">
+
+            <h2>🎯 Recommended Levels</h2>
+
+            <p class="subtitle">
+                Levels selected to improve your current skill set.
+            </p>
+
+
+            <div class="recommendation">
+
+                <div>
+                    <div class="level-name">Wave Challenge A</div>
+                    <div class="level-info">
+                        Wave • Above Average → Experienced
+                    </div>
+                </div>
+
+                <div class="difficulty">
+                    PRACTICE
+                </div>
+
+            </div>
+
+
+            <div class="recommendation">
+
+                <div>
+                    <div class="level-name">Ship Challenge B</div>
+                    <div class="level-info">
+                        Ship • Above Average
+                    </div>
+                </div>
+
+                <div class="difficulty">
+                    SKILL
+                </div>
+
+            </div>
+
+
+            <div class="recommendation">
+
+                <div>
+                    <div class="level-name">Spider Challenge C</div>
+                    <div class="level-info">
+                        Spider • Midrange → Above Average
+                    </div>
+                </div>
+
+                <div class="difficulty">
+                    RANK-UP
+                </div>
+
+            </div>
+
+
+            <div class="recommendation">
+
+                <div>
+                    <div class="level-name">PulseFrame Trial</div>
+                    <div class="level-info">
+                        Multi-mode • Promotion test
+                    </div>
+                </div>
+
+                <div class="difficulty">
+                    TEST
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXTERNAL RANKINGS -->
+
+        <section class="card" id="profile">
+
+            <h2>🌎 External Rankings</h2>
+
+            <p class="subtitle">
+                Rankings from other Geometry Dash lists.
+            </p>
+
+
+            <div class="external">
+
+                <div class="external-name">
+                    Pointercrate Demonlist
+                </div>
+
+                <div class="external-rank">
+                    #18
+                </div>
+
+            </div>
+
+
+            <div class="external">
+
+                <div class="external-name">
+                    AREDL
+                </div>
+
+                <div class="external-rank">
+                    #11
+                </div>
+
+            </div>
+
+
+            <div class="external">
+
+                <div class="external-name">
+                    PulseFrame Overall
+                </div>
+
+                <div class="external-rank">
+                    #7
+                </div>
+
+            </div>
+
+
+            <div class="external">
+
+                <div class="external-name">
+                    PulseFrame Wave
+                </div>
+
+                <div class="external-rank">
+                    #2
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    ⚡ PulseFrame List
+    <br><br>
+    A Geometry Dash skill progression and ranking project.
+
+</footer>
+
+
+</body>
