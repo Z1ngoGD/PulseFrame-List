@@ -1,1 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Levels - PulseFrame</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+/* ================================
+   PULSEFRAME LEVEL DATABASE
+================================ */
+
+.levels-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 45px 20px 80px;
+}
+
+/* Header */
+
+.levels-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.levels-header h1 {
+    font-size: clamp(42px, 8vw, 72px);
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -2px;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(94,203,255,.7),
+        0 0 35px rgba(94,203,255,.25);
+}
+
+.levels-header h1 span {
+    color: #5ecbff;
+}
+
+.levels-header p {
+    color: #8e9bad;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* Animated blue line */
+
+.pulse-line {
+    width: 180px;
+    height: 3px;
+    margin: 20px auto 0;
+    background: #5ecbff;
+    border-radius: 10px;
+    box-shadow:
+        0 0 10px #5ecbff,
+        0 0 30px rgba(94,203,255,.7);
+    animation: pulseLine 2s ease-in-out infinite;
+}
+
+@keyframes pulseLine {
+    0%,100% {
+        transform: scaleX(.7);
+        opacity: .55;
+    }
+
+    50% {
+        transform: scaleX(1.2);
+        opacity: 1;
+    }
+}
+
+/* Tabs */
+
+.level-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.level-tab {
+    border: 1px solid rgba(94,203,255,.35);
+    background: rgba(16,20,30,.8);
+    color: #8793a5;
+    padding: 12px 28px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.level-tab:hover,
+.level-tab.active {
+    color: #ffffff;
+    border-color: #5ecbff;
+    background: rgba(94,203,255,.12);
+    box-shadow:
+        0 0 15px rgba(94,203,255,.25),
+        inset 0 0 15px rgba(94,203,255,.05);
+}
+
+/* Search */
+
+.level-tools {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.level-search {
+    flex: 1;
+    padding: 16px 20px;
+    border-radius: 14px;
+    border: 1px solid #263445;
+    background: #0d1119;
+    color: white;
+    outline: none;
+    font-size: 16px;
+    transition: .25s;
+}
+
+.level-search:focus {
+    border-color: #5ecbff;
+    box-shadow: 0 0 18px rgba(94,203,255,.2);
+}
+
+.filter-button {
+    padding: 0 22px;
+    border-radius: 14px;
+    border: 1px solid #263445;
+    background: #101722;
+    color: #a9b6c7;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.filter-button:hover {
+    color: white;
+    border-color: #5ecbff;
+    box-shadow: 0 0 15px rgba(94,203,255,.25);
+}
+
+/* Level list */
+
+.level-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+/* Individual level */
+
+.level-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    min-height: 105px;
+    padding: 16px 22px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,.035);
+    background:
+        linear-gradient(
+            110deg,
+            rgba(16,20,30,.98),
+            rgba(11,16,25,.98)
+        );
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+
+    animation: levelEnter .6s ease both;
+}
+
+.level-row:nth-child(1) { animation-delay: .05s; }
+.level-row:nth-child(2) { animation-delay: .10s; }
+.level-row:nth-child(3) { animation-delay: .15s; }
+.level-row:nth-child(4) { animation-delay: .20s; }
+.level-row:nth-child(5) { animation-delay: .25s; }
+.level-row:nth-child(6) { animation-delay: .30s; }
+.level-row:nth-child(7) { animation-delay: .35s; }
+.level-row:nth-child(8) { animation-delay: .40s; }
+.level-row:nth-child(9) { animation-delay: .45s; }
+.level-row:nth-child(10) { animation-delay: .50s; }
+
+@keyframes levelEnter {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.level-row::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: #5ecbff;
+    box-shadow: 0 0 15px #5ecbff;
+    opacity: 0;
+    transition: .3s;
+}
+
+.level-row:hover {
+    transform: translateX(7px);
+    border-color: rgba(94,203,255,.45);
+    background:
+        linear-gradient(
+            110deg,
+            rgba(18,29,43,1),
+            rgba(10,19,30,1)
+        );
+    box-shadow:
+        0 0 25px rgba(94,203,255,.13),
+        inset 0 0 25px rgba(94,203,255,.025);
+}
+
+.level-row:hover::before {
+    opacity: 1;
+}
+
+/* Rank */
+
+.level-rank {
+    font-size: 27px;
+    font-weight: 700;
+    color: #788597;
+}
+
+.level-row:first-child .level-rank {
+    color: #5ecbff;
+    text-shadow: 0 0 15px rgba(94,203,255,.7);
+}
+
+/* Level information */
+
+.level-name {
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.level-creator {
+    color: #748297;
+    font-size: 14px;
+}
+
+/* Tags */
+
+.level-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.level-tag {
+    font-size: 11px;
+    padding: 5px 9px;
+    border-radius: 7px;
+    border: 1px solid rgba(94,203,255,.22);
+    color: #83d8ff;
+    background: rgba(94,203,255,.06);
+}
+
+/* Extreme Demon badge */
+
+.extreme-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #dff7ff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+}
+
+.demon-icon {
+    width: 31px;
+    height: 31px;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(145deg,#071522,#123c58);
+
+    border: 2px solid #5ecbff;
+
+    color: #5ecbff;
+
+    font-size: 18px;
+
+    box-shadow:
+        0 0 10px rgba(94,203,255,.55),
+        inset 0 0 10px rgba(94,203,255,.15);
+
+    animation: demonGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes demonGlow {
+    0%,100% {
+        box-shadow:
+            0 0 7px rgba(94,203,255,.35),
+            inset 0 0 7px rgba(94,203,255,.1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 18px rgba(94,203,255,.8),
+            inset 0 0 12px rgba(94,203,255,.2);
+    }
+}
+
+/* #1 */
+
+.level-row.first-place {
+    border-color: rgba(94,203,255,.4);
+    background:
+        radial-gradient(
+            circle at 80% 50%,
+            rgba(94,203,255,.08),
+            transparent 45%
+        ),
+        #0e141e;
+}
+
+.level-row.first-place::after {
+    content: "";
+    position: absolute;
+    inset: -100%;
+    background: linear-gradient(
+        110deg,
+        transparent 40%,
+        rgba(255,255,255,.07) 50%,
+        transparent 60%
+    );
+    transform: translateX(-40%);
+    animation: shine 5s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-45%);
+    }
+
+    45%,100% {
+        transform: translateX(45%);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .levels-page {
+        padding: 30px 12px 60px;
+    }
+
+    .level-tools {
+        flex-direction: column;
+    }
+
+    .filter-button {
+        padding: 13px;
+    }
+
+    .level-row {
+        grid-template-columns: 52px 1fr;
+        padding: 15px;
+    }
+
+    .level-rank {
+        font-size: 21px;
+    }
+
+    .level-name {
+        font-size: 20px;
+    }
+
+    .extreme-badge {
+        grid-column: 2;
+        margin-top: 10px;
+    }
+
+    .level-tabs {
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .level-tab {
+        white-space: nowrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        ⚡ Pulse<span>Frame</span>
+    </div>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="rankings.html">Rankings</a>
+        <a href="progression.html">Progression</a>
+        <a href="levels.html" class="active">Levels</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+</header>
+
+<main class="levels-page">
+
+    <section class="levels-header">
+        <h1>Pulse<span>Frame</span> Levels</h1>
+
+        <p>
+            Geometry Dash levels ranked by PulseFrame difficulty and skill.
+        </p>
+
+        <div class="pulse-line"></div>
+    </section>
+
+
+    <div class="level-tabs">
+        <button class="level-tab active">Classic</button>
+        <button class="level-tab">Platformer</button>
+    </div>
+
+
+    <div class="level-tools">
+
+        <input
+            type="text"
+            class="level-search"
+            id="level-search"
+            placeholder="Search levels..."
+        >
+
+        <button class="filter-button">
+            ⚙ Filters
+        </button>
+
+    </div>
+
+
+    <section class="level-list" id="level-list">
+
+
+        <!-- #1 -->
+
+        <article class="level-row first-place">
+
+            <div class="level-rank">
+                #1
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    GRIEF
+                </div>
+
+                <div class="level-creator">
+                    Doggie
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">High CPS</span>
+                    <span class="level-tag">Fast-Paced</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #2 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #2
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Society
+                </div>
+
+                <div class="level-creator">
+                    PulseFrame Database
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Ship</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #3 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #3
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Thinking Space II
+                </div>
+
+                <div class="level-creator">
+                    Atomic
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Precision</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #4 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #4
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Amethyst
+                </div>
+
+                <div class="level-creator">
+                    PulseFrame Database
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Ship</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #5 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #5
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Flamewall
+                </div>
+
+                <div class="level-creator">
+                    Narwall
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Fast-Paced</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #6 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #6
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Tidal Wave
+                </div>
+
+                <div class="level-creator">
+                    OniLink
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Ship</span>
+                    <span class="level-tag">Endurance</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #7 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #7
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Green Bullet
+                </div>
+
+                <div class="level-creator">
+                    PulseFrame Database
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Timing</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #8 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #8
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    ORBIT
+                </div>
+
+                <div class="level-creator">
+                    PulseFrame Database
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Ship</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #9 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #9
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Antarctic Lights
+                </div>
+
+                <div class="level-creator">
+                    PulseFrame Database
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Ship</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+        <!-- #10 -->
+
+        <article class="level-row">
+
+            <div class="level-rank">
+                #10
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Nullscapes
+                </div>
+
+                <div class="level-creator">
+                    Kiba
+                </div>
+
+                <div class="level-tags">
+                    <span class="level-tag">Wave</span>
+                    <span class="level-tag">Precision</span>
+                </div>
+
+            </div>
+
+            <div class="extreme-badge">
+                <div class="demon-icon">☠</div>
+                Extreme Demon
+            </div>
+
+        </article>
+
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>© 2026 PulseFrame List</p>
+</footer>
+
+
+<script>
+
+/* Search */
+
+const searchInput = document.getElementById("level-search");
+const levelRows = document.querySelectorAll(".level-row");
+
+searchInput.addEventListener("input", () => {
+
+    const search = searchInput.value.toLowerCase();
+
+    levelRows.forEach(row => {
+
+        const name = row
+            .querySelector(".level-name")
+            .textContent
+            .toLowerCase();
+
+        row.style.display =
+            name.includes(search)
+            ? ""
+            : "none";
+
+    });
+
+});
+
+
+/* Tabs */
+
+const tabs = document.querySelectorAll(".level-tab");
+
+tabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+        tabs.forEach(t =>
+            t.classList.remove("active")
+        );
+
+        tab.classList.add("active");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
