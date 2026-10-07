@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,10 @@
 <body>
 
 <header>
-    <div class="logo">⚡ Pulse<span>Frame</span></div>
+
+    <div class="logo">
+        ⚡ Pulse<span>Frame</span>
+    </div>
 
     <nav>
         <a href="../index.html">Home</a>
@@ -21,7 +25,9 @@
         <a href="levels.html">Levels</a>
         <a href="profile.html">Profile</a>
     </nav>
+
 </header>
+
 
 <main>
 
@@ -45,46 +51,66 @@
 
 </main>
 
+
 <footer>
+
     <p>© 2026 PulseFrame List</p>
+
 </footer>
 
 
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-const SUPABASE_URL = "https://bgyamihqdqvxajajwyrx.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_aZIFkJBYnFhyMh8HLbUlqw_nZKFXeVz";
+const SUPABASE_URL =
+    "https://bgyamihqdqvxajajwyrx.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_aZIFkJBYnFhyMh8HLbUlqw_nZKFXeVz";
+
 
 const supabaseClient = window.supabase.createClient(
-    bgyamihqdqvxajajwyrx.supabase.co/rest/v1/
-    sb_publishable_aZIFkJBYnFhyMh8HLbUlqw_nZKFXeVz
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
 );
 
 
-const loginButton = document.getElementById("discord-login");
-const statusText = document.getElementById("login-status");
+const loginButton =
+    document.getElementById("discord-login");
+
+const statusText =
+    document.getElementById("login-status");
 
 
 loginButton.addEventListener("click", async () => {
 
-    statusText.textContent = "Connecting to Discord...";
+    statusText.textContent =
+        "Connecting to Discord...";
 
-    const { error } = await supabaseClient.auth.signInWithOAuth({
+    loginButton.disabled = true;
 
-        provider: "discord",
 
-        options: {
-            redirectTo: window.location.href
-        }
+    const { error } =
+        await supabaseClient.auth.signInWithOAuth({
 
-    });
+            provider: "discord",
+
+            options: {
+                redirectTo: window.location.href
+            }
+
+        });
+
 
     if (error) {
 
-        statusText.textContent = "Error: " + error.message;
+        console.error(error);
+
+        statusText.textContent =
+            "Error: " + error.message;
+
+        loginButton.disabled = false;
 
     }
 
@@ -93,19 +119,40 @@ loginButton.addEventListener("click", async () => {
 
 async function checkLogin() {
 
-    const { data } = await supabaseClient.auth.getSession();
+    const { data, error } =
+        await supabaseClient.auth.getSession();
+
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
+
 
     if (data.session) {
 
-        const user = data.session.user;
+        const user =
+            data.session.user;
 
-        loginButton.textContent = "Discord Connected ✓";
+
+        loginButton.textContent =
+            "Discord Connected ✓";
+
+        loginButton.disabled =
+            true;
+
 
         statusText.textContent =
             "Logged in as " +
-            (user.user_metadata?.full_name ||
-             user.user_metadata?.name ||
-             "Discord user");
+            (
+                user.user_metadata?.full_name ||
+                user.user_metadata?.name ||
+                user.email ||
+                "Discord user"
+            );
 
     }
 
@@ -117,4 +164,5 @@ checkLogin();
 </script>
 
 </body>
+
 </html>
