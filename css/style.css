@@ -463,19 +463,23 @@ footer {
     object-fit: cover;
     display: block;
 }
-
+.level-video + .extreme-badge {
+    margin-left: 20px;
+    flex-shrink: 0;
+}
 .level-video {
     position: relative;
-    width: 150px;
-    height: 84px;
+    width: 120px;
+    height: 68px;
     flex-shrink: 0;
     display: block;
     overflow: hidden;
     border-radius: 8px;
     border: 1px solid #26344b;
     background: #080a10;
-    margin-left: auto;
+    margin-left: 20px;
 }
+
 .level-video:hover {
     border-color: #5ecbff;
 }
