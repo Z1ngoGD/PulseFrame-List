@@ -1,34 +1,472 @@
 
-<div class="profile-stats">
-    <div class="stat-box">
-        <div class="stat-label">LEVEL POINTS</div>
-        <div class="stat-value" id="level-points">—</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile - PulseFrame</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    background: #080a10;
+    color: #f1f4ff;
+}
+
+.profile-page {
+    max-width: 900px;
+    margin: 35px auto 60px;
+    padding: 0 18px;
+}
+
+.profile-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg,#111725,#090c14);
+    border: 1px solid #263247;
+    border-radius: 20px;
+    padding: 35px 28px;
+    box-shadow: 0 15px 55px #0005;
+}
+
+.profile-card::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    left: -250px;
+    top: 280px;
+    border: 1px solid #5ecbff18;
+    border-radius: 50%;
+    box-shadow: 0 0 0 30px #5ecbff08,
+                0 0 0 65px #5ecbff05,
+                0 0 0 100px #5ecbff03;
+    pointer-events: none;
+}
+
+.profile-content {
+    position: relative;
+    z-index: 1;
+}
+
+.profile-top { text-align: center; }
+
+.avatar-wrap {
+    position: relative;
+    width: 165px;
+    height: 165px;
+    margin: 0 auto 18px;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #30445f;
+    background: #101827;
+    box-shadow: 0 0 28px #5ecbff18;
+}
+
+.avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5ecbff;
+    font-size: 62px;
+}
+
+.profile-badge {
+    position: absolute;
+    right: -8px;
+    bottom: -3px;
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #5ecbff;
+    border-radius: 14px;
+    background: #111a29;
+    color: #5ecbff;
+    font-size: 29px;
+    box-shadow: 0 0 20px #5ecbff25;
+}
+
+.profile-name {
+    font-size: clamp(32px,6vw,45px);
+    overflow-wrap: anywhere;
+    margin-bottom: 5px;
+}
+
+.profile-clan {
+    color: #5ecbff;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.profile-description {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    color: #8995aa;
+    line-height: 1.6;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.pf-button {
+    padding: 11px 17px;
+    border: 1px solid #30445f;
+    border-radius: 9px;
+    background: #101b2b;
+    color: #e4f3ff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pf-button.primary {
+    background: #5ecbff;
+    color: #07101a;
+    border-color: #5ecbff;
+}
+
+.pf-button:hover { border-color: #5ecbff; }
+.pf-button:disabled { opacity: .65; }
+
+.login-status {
+    min-height: 20px;
+    color: #8493aa;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.profile-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 24px 0;
+    border-bottom: 1px solid #293448;
+}
+
+.profile-tab {
+    padding: 14px 5px;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    color: #778399;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.profile-tab.active {
+    color: #f1f6ff;
+    border-bottom-color: #5ecbff;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 38px;
+}
+
+.stat-box {
+    padding: 22px 10px;
+    text-align: center;
+    background: #0b111d;
+    border: 1px solid #202d41;
+    border-radius: 12px;
+}
+
+.stat-label {
+    color: #9ba8bc;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .5px;
+}
+
+.stat-value {
+    margin-top: 10px;
+    color: #5ecbff;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.ranking-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: clamp(21px,4vw,30px);
+}
+
+.ranking-heading span { color: #5ecbff; }
+
+.ranking-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 17px 4px;
+    border-bottom: 1px solid #293142;
+    color: #dce3ee;
+}
+
+.ranking-value {
+    color: #5ecbff;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.profile-note {
+    margin-top: 18px;
+    color: #697991;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+[hidden] { display: none !important; }
+
+@media(max-width:520px) {
+    .profile-page { margin-top: 20px; padding: 0 12px; }
+    .profile-card { padding: 27px 15px; border-radius: 15px; }
+    .avatar-wrap { width: 140px; height: 140px; }
+    .profile-badge { width: 45px; height: 45px; font-size: 24px; }
+    .profile-clan { font-size: 17px; }
+    .stat-box { padding: 17px 5px; }
+    .stat-label { font-size: 11px; }
+    .stat-value { font-size: 24px; }
+    .ranking-row { font-size: 13px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚡ Pulse<span>Frame</span></div>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="rankings.html">Rankings</a>
+        <a href="progression.html">Progression</a>
+        <a href="levels.html">Levels</a>
+        <a href="profile.html" class="active">Profile</a>
+    </nav>
+</header>
+
+<main class="profile-page">
+<section class="profile-card">
+<div class="profile-content">
+
+    <div class="profile-top">
+        <div class="avatar-wrap">
+            <img id="profile-avatar" class="profile-avatar"
+                 alt="Discord avatar" hidden>
+            <div id="avatar-placeholder"
+                 class="profile-avatar avatar-placeholder">⚡</div>
+            <div class="profile-badge" title="PulseFrame player">✚</div>
+        </div>
+
+        <h1 class="profile-name" id="profile-name">Guest Player</h1>
+        <div class="profile-clan" id="profile-clan">CLAN: NONE</div>
+        <p class="profile-description" id="profile-description">
+            Connect Discord to create your PulseFrame player profile.
+        </p>
+
+        <div class="profile-actions">
+            <button class="pf-button primary" id="discord-login">
+                Connect Discord
+            </button>
+            <button class="pf-button" id="edit-profile" hidden>
+                Edit Profile
+            </button>
+            <button class="pf-button" id="discord-logout" hidden>
+                Sign Out
+            </button>
+        </div>
+
+        <p class="login-status" id="login-status" aria-live="polite">
+            Your profile starts here.
+        </p>
     </div>
 
-    <div class="stat-box">
-        <div class="stat-label">TOTAL POINTS</div>
-        <div class="stat-value" id="total-points">—</div>
+    <div class="profile-tabs" role="tablist">
+        <button class="profile-tab active" id="classic-tab"
+                role="tab" aria-selected="true">CLASSIC</button>
+        <button class="profile-tab" id="platformer-tab"
+                role="tab" aria-selected="false">PLATFORMER</button>
     </div>
-</div>
 
-<h2 class="ranking-heading"><span>◎</span> GLOBAL RANKINGS</h2>
+    <div class="profile-stats">
+        <div class="stat-box">
+            <div class="stat-label">LEVEL POINTS</div>
+            <div class="stat-value" id="level-points">—</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-label">TOTAL POINTS</div>
+            <div class="stat-value" id="total-points">—</div>
+        </div>
+    </div>
 
-<div class="ranking-row">
-    <span>Overall PulseFrame Rank</span>
-    <span class="ranking-value" id="overall-rank">—</span>
-</div>
+    <h2 class="ranking-heading"><span>◎</span> GLOBAL RANKINGS</h2>
 
-<div class="ranking-row">
-    <span>Cube Skill Rank</span>
-    <span class="ranking-value" id="cube-rank">—</span>
-</div>
+    <div class="ranking-row">
+        <span>Overall PulseFrame Rank</span>
+        <span class="ranking-value" id="overall-rank">—</span>
+    </div>
+    <div class="ranking-row">
+        <span>Cube Skill Rank</span>
+        <span class="ranking-value" id="cube-rank">—</span>
+    </div>
+    <div class="ranking-row">
+        <span>Wave Skill Rank</span>
+        <span class="ranking-value" id="wave-rank">—</span>
+    </div>
+    <div class="ranking-row">
+        <span>Ship Skill Rank</span>
+        <span class="ranking-value" id="ship-rank">—</span>
+    </div>
 
-<div class="ranking-row">
-    <span>Wave Skill Rank</span>
-    <span class="ranking-value" id="wave-rank">—</span>
-</div>
+    <p class="profile-note">
+        Rankings and points will appear when PulseFrame's ranking database
+        is connected. Discord sign-in does not automatically assign points.
+    </p>
 
-<div class="ranking-row">
-    <span>Ship Skill Rank</span>
-    <span class="ranking-value" id="ship-rank">—</span>
 </div>
+</section>
+</main>
+
+<footer><p>© 2026 PulseFrame List</p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL =
+    "https://bgyamihqdqvxajajwyrx.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_aZIFkJBYnFhyMh8HLbUlqw_nZKFXeVz";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL, SUPABASE_ANON_KEY
+);
+
+const loginButton = document.getElementById("discord-login");
+const logoutButton = document.getElementById("discord-logout");
+const editButton = document.getElementById("edit-profile");
+const statusText = document.getElementById("login-status");
+
+loginButton.addEventListener("click", async () => {
+    statusText.textContent = "Connecting to Discord...";
+    loginButton.disabled = true;
+
+    const { error } = await supabaseClient.auth.signInWithOAuth({
+        provider: "discord",
+        options: {
+            redirectTo: window.location.href.split("?")[0].split("#")[0]
+        }
+    });
+
+    if (error) {
+        statusText.textContent = "Login error: " + error.message;
+        loginButton.disabled = false;
+    }
+});
+
+logoutButton.addEventListener("click", async () => {
+    logoutButton.disabled = true;
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+        statusText.textContent = "Sign-out error: " + error.message;
+        logoutButton.disabled = false;
+        return;
+    }
+    window.location.reload();
+});
+
+editButton.addEventListener("click", () => {
+    const clanNow = document.getElementById("profile-clan")
+        .textContent.replace(/^CLAN:\s*/i, "");
+    const bioNow = document.getElementById("profile-description").textContent;
+
+    const clan = prompt("Enter your clan name (or NONE):", clanNow);
+    if (clan === null) return;
+
+    const bio = prompt("Enter your profile description:", bioNow);
+    if (bio === null) return;
+
+    document.getElementById("profile-clan").textContent =
+        "CLAN: " + (clan.trim() || "NONE");
+    document.getElementById("profile-description").textContent =
+        bio.trim() || "This player hasn't provided a description yet.";
+
+    statusText.textContent =
+        "Preview updated. Permanent profile saving is not connected yet.";
+});
+
+function setMode(mode) {
+    const classic = mode === "classic";
+    document.getElementById("classic-tab").classList.toggle("active", classic);
+    document.getElementById("platformer-tab").classList.toggle("active", !classic);
+    document.getElementById("classic-tab").setAttribute("aria-selected", String(classic));
+    document.getElementById("platformer-tab").setAttribute("aria-selected", String(!classic));
+    statusText.textContent = classic
+        ? "Classic mode selected."
+        : "Platformer mode selected. Platformer stats are not connected yet.";
+}
+
+document.getElementById("classic-tab").addEventListener("click", () => setMode("classic"));
+document.getElementById("platformer-tab").addEventListener("click", () => setMode("platformer"));
+
+async function checkLogin() {
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error) {
+        statusText.textContent = "Could not check login: " + error.message;
+        return;
+    }
+
+    const user = data.session?.user;
+
+    if (!user) return;
+
+    const metadata = user.user_metadata || {};
+    document.getElementById("profile-name").textContent =
+        metadata.full_name || metadata.name || metadata.username || "Discord Player";
+
+    document.getElementById("profile-description").textContent =
+        "Welcome to PulseFrame! Add a description to your profile.";
+
+    const avatarUrl = metadata.avatar_url || metadata.picture;
+
+    if (avatarUrl) {
+        const avatar = document.getElementById("profile-avatar");
+        avatar.src = avatarUrl;
+        avatar.hidden = false;
+        document.getElementById("avatar-placeholder").hidden = true;
+
+        avatar.onerror = () => {
+            avatar.hidden = true;
+            document.getElementById("avatar-placeholder").hidden = false;
+        };
+    }
+
+    loginButton.hidden = true;
+    logoutButton.hidden = false;
+    editButton.hidden = false;
+    statusText.textContent = "Connected to Discord successfully.";
+}
+
+checkLogin();
+</script>
+
+</body>
+</html>
