@@ -11,8 +11,15 @@
 
 <body>
 
-<header>
-    <div class="logo">⚡ Pulse<span>Frame</span></div>
+<header class="site-header">
+
+    <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+
+        <div class="logo">
+            Pulse<span>Frame</span>
+        </div>
+    </a>
 
     <nav>
         <a href="index.html">Home</a>
@@ -21,52 +28,283 @@
         <a href="main/levels.html">Levels</a>
         <a href="main/profile.html">Profile</a>
     </nav>
+
+    <button class="menu-button" aria-label="Open menu">
+        ☰
+    </button>
+
 </header>
+
 
 <main>
 
-    <section class="hero">
-        <h1>Geometry Dash <span>Skill Rankings</span></h1>
+    <!-- HERO -->
+
+    <section class="pf-hero">
+
+        <div class="hero-label">
+            PULSEFRAME SKILL DATABASE
+        </div>
+
+        <h1>
+            Geometry Dash
+            <span>Skill Rankings</span>
+        </h1>
 
         <p>
-            PulseFrame ranks Geometry Dash players by their individual
-            game-mode skills and overall ability.
+            A skill-based ranking system for Geometry Dash players,
+            built around individual game-mode ability and overall performance.
         </p>
+
+        <div class="neon-wave"></div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-icon">◈</div>
+                <strong>8</strong>
+                <span>SKILL SETS</span>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">◆</div>
+                <strong>6</strong>
+                <span>SKILL TIERS</span>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">☠</div>
+                <strong>1,000+</strong>
+                <span>LEVELS</span>
+            </div>
+
+        </div>
+
+
+        <!-- MAIN BUTTONS -->
+
+        <div class="hero-actions">
+
+            <a href="main/rankings.html" class="primary-button">
+                Explore Rankings
+                <span>→</span>
+            </a>
+
+            <a href="main/levels.html" class="secondary-button">
+                Explore Levels
+                <span>▣</span>
+            </a>
+
+        </div>
+
+        <a href="main/profile.html" class="profile-button">
+            Create Your PulseFrame Profile
+            <span>＋</span>
+        </a>
+
     </section>
 
-    <section class="main-grid">
 
-        <div class="card">
-            <h2>Overall Rankings</h2>
-            <p>View the best PulseFrame players.</p>
-            <a href="main/rankings.html">View Rankings →</a>
+    <!-- FEATURED LEVEL -->
+
+    <section class="home-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-label">CURRENT #1</span>
+                <h2>Top Level</h2>
+            </div>
+
+            <a href="main/levels.html">View all levels →</a>
         </div>
 
-        <div class="card">
-            <h2>Skill Sets</h2>
-            <p>Explore rankings for Cube, Ship, Wave, UFO and more.</p>
-            <a href="main/rankings.html">Explore Skills →</a>
+
+        <article class="featured-level">
+
+            <a
+                class="featured-video"
+                href="https://youtu.be/gB8slBPlOjc"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/gB8slBPlOjc/maxresdefault.jpg"
+                    alt="Grief verification video"
+                >
+
+                <div class="video-overlay">
+                    <div class="play-button">▶</div>
+                    <span>WATCH VERIFICATION</span>
+                </div>
+
+            </a>
+
+
+            <div class="featured-info">
+
+                <div class="featured-rank">
+                    #1
+                </div>
+
+                <h2>GRIEF</h2>
+
+                <p class="featured-creator">
+                    Verified by <strong>Doggie</strong>
+                </p>
+
+                <div class="featured-tags">
+                    <span>Wave</span>
+                    <span>High CPS</span>
+                    <span>Fast-Paced</span>
+                </div>
+
+                <div class="featured-difficulty">
+                    <div class="demon-icon">☠</div>
+
+                    <div>
+                        <strong>Extreme Demon</strong>
+                        <span>PulseFrame #1</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- QUICK ACCESS -->
+
+    <section class="home-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-label">PULSEFRAME</span>
+                <h2>Explore</h2>
+            </div>
         </div>
 
-        <div class="card">
-            <h2>Progression</h2>
-            <p>Find levels designed to improve your skills.</p>
-            <a href="main/progression.html">View Progression →</a>
+
+        <div class="explore-grid">
+
+            <a href="main/rankings.html" class="explore-card">
+                <div class="explore-icon">🏆</div>
+                <div>
+                    <h3>Rankings</h3>
+                    <p>See the best players across every skill set.</p>
+                </div>
+                <span>→</span>
+            </a>
+
+            <a href="main/progression.html" class="explore-card">
+                <div class="explore-icon">◆</div>
+                <div>
+                    <h3>Progression</h3>
+                    <p>Find levels designed to improve your skills.</p>
+                </div>
+                <span>→</span>
+            </a>
+
+            <a href="main/levels.html" class="explore-card">
+                <div class="explore-icon">☠</div>
+                <div>
+                    <h3>Levels</h3>
+                    <p>Browse the PulseFrame level database.</p>
+                </div>
+                <span>→</span>
+            </a>
+
+            <a href="main/profile.html" class="explore-card">
+                <div class="explore-icon">●</div>
+                <div>
+                    <h3>Profile</h3>
+                    <p>View your PulseFrame skill profile.</p>
+                </div>
+                <span>→</span>
+            </a>
+
         </div>
 
-        <div class="card">
-            <h2>Player Profile</h2>
-            <p>Create your PulseFrame player profile.</p>
-            <a href="main/profile.html">Open Profile →</a>
+    </section>
+
+
+    <!-- RECENT CHANGES -->
+
+    <section class="home-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-label">DATABASE</span>
+                <h2>Recent Changes</h2>
+            </div>
+        </div>
+
+
+        <div class="changes-card">
+
+            <div class="change">
+
+                <div class="change-icon">+</div>
+
+                <div>
+                    <strong>GRIEF</strong>
+                    <p>
+                        placed at <b>#1</b> in the PulseFrame level ranking.
+                    </p>
+                </div>
+
+                <time>RECENT</time>
+
+            </div>
+
+
+            <div class="change">
+
+                <div class="change-icon">◆</div>
+
+                <div>
+                    <strong>PULSEFRAME</strong>
+                    <p>
+                        Skill-based ranking database development continues.
+                    </p>
+                </div>
+
+                <time>2026</time>
+
+            </div>
+
+
+            <div class="change">
+
+                <div class="change-icon">+</div>
+
+                <div>
+                    <strong>SKILL SETS</strong>
+                    <p>
+                        Cube, Ship, Wave, UFO, Ball, Robot, Spider and Swing.
+                    </p>
+                </div>
+
+                <time>2026</time>
+
+            </div>
+
         </div>
 
     </section>
 
 </main>
 
+
 <footer>
     <p>© 2026 PulseFrame List</p>
 </footer>
+
 
 <script src="js/script.js"></script>
 
