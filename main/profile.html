@@ -1,168 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Profile - PulseFrame</title>
-
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-
-<body>
-
-<header>
-
-    <div class="logo">
-        ⚡ Pulse<span>Frame</span>
+<div class="profile-stats">
+    <div class="stat-box">
+        <div class="stat-label">LEVEL POINTS</div>
+        <div class="stat-value" id="level-points">—</div>
     </div>
 
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="rankings.html">Rankings</a>
-        <a href="progression.html">Progression</a>
-        <a href="levels.html">Levels</a>
-        <a href="profile.html">Profile</a>
-    </nav>
-
-</header>
-
-
-<main>
-
-    <section class="hero">
-
-        <h1>Your <span>Profile</span></h1>
-
-        <p>
-            Connect your Discord account to create your PulseFrame player profile.
-        </p>
-
-        <br>
-
-        <button id="discord-login">
-            Connect Discord
-        </button>
-
-        <p id="login-status"></p>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <p>© 2026 PulseFrame List</p>
-
-</footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-const SUPABASE_URL =
-    "https://bgyamihqdqvxajajwyrx.supabase.co";
-
-const SUPABASE_ANON_KEY =
-    "sb_publishable_aZIFkJBYnFhyMh8HLbUlqw_nZKFXeVz";
-
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
-
-
-const loginButton =
-    document.getElementById("discord-login");
-
-const statusText =
-    document.getElementById("login-status");
-
-
-loginButton.addEventListener("click", async () => {
-
-    statusText.textContent =
-        "Connecting to Discord...";
-
-    loginButton.disabled = true;
-
-
-    const { error } =
-        await supabaseClient.auth.signInWithOAuth({
-
-            provider: "discord",
-
-            options: {
-                redirectTo: window.location.href
-            }
-
-        });
-
-
-    if (error) {
-
-        console.error(error);
-
-        statusText.textContent =
-            "Error: " + error.message;
-
-        loginButton.disabled = false;
-
-    }
-
-});
-
-
-async function checkLogin() {
-
-    const { data, error } =
-        await supabaseClient.auth.getSession();
-
-
-    if (error) {
-
-        console.error(error);
-
-        return;
-
-    }
-
-
-    if (data.session) {
-
-        const user =
-            data.session.user;
-
-
-        loginButton.textContent =
-            "Discord Connected ✓";
-
-        loginButton.disabled =
-            true;
-
-
-        statusText.textContent =
-            "Logged in as " +
-            (
-                user.user_metadata?.full_name ||
-                user.user_metadata?.name ||
-                user.email ||
-                "Discord user"
-            );
-
-    }
-
-}
-
-
-checkLogin();
-
-</script>
-
-</body>
-
-</html>
+    <div class="stat-box">
+        <div class="stat-label">TOTAL POINTS</div>
+        <div class="stat-value" id="total-points">—</div>
+    </div>
+</div>
+
+<h2 class="ranking-heading"><span>◎</span> GLOBAL RANKINGS</h2>
+
+<div class="ranking-row">
+    <span>Overall PulseFrame Rank</span>
+    <span class="ranking-value" id="overall-rank">—</span>
+</div>
+
+<div class="ranking-row">
+    <span>Cube Skill Rank</span>
+    <span class="ranking-value" id="cube-rank">—</span>
+</div>
+
+<div class="ranking-row">
+    <span>Wave Skill Rank</span>
+    <span class="ranking-value" id="wave-rank">—</span>
+</div>
+
+<div class="ranking-row">
+    <span>Ship Skill Rank</span>
+    <span class="ranking-value" id="ship-rank">—</span>
+</div>
