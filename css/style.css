@@ -1270,3 +1270,51 @@ nav a.active {
         font-size: 13px;
     }
 }
+/* PulseFrame level-row YouTube thumbnails */
+.level-video {
+    display: block;
+    position: relative;
+    width: 120px;
+    min-width: 120px;
+    aspect-ratio: 16 / 9;
+    margin-left: 12px;
+    overflow: hidden;
+    border: 1px solid #26344b;
+    border-radius: 8px;
+    background: #10141e;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.level-video img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.level-video .video-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 23px;
+    text-shadow: 0 1px 5px #000;
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.level-video:hover {
+    border-color: #5ecbff;
+    transform: scale(1.03);
+}
+
+@media (max-width: 600px) {
+    .level-video {
+        width: 90px;
+        min-width: 90px;
+        margin-left: 4px;
+    }
+}
+
