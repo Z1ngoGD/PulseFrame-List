@@ -441,3 +441,45 @@ footer {
 
     pointer-events: none;
 }
+/* =========================
+   LEVEL VIDEO THUMBNAIL
+========================= */
+
+.level-video {
+    position: relative;
+    width: 150px;
+    height: 84px;
+    flex-shrink: 0;
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #26344b;
+    background: #080a10;
+}
+
+.level-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 24px;
+    text-shadow: 0 2px 8px #000000;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.level-video:hover {
+    border-color: #5ecbff;
+}
+
+.level-video:hover .video-play {
+    background: rgba(0, 0, 0, 0.30);
+}
