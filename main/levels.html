@@ -331,6 +331,131 @@ body {
     object-fit: contain;
     flex-shrink: 0;
 }
+/* Clickable level details modal */
+.level-row {
+    cursor: pointer;
+}
+.level-row:focus-visible {
+    outline: 2px solid #65cfff;
+    outline-offset: 3px;
+}
+.level-details-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(2, 7, 16, .78);
+    backdrop-filter: blur(8px);
+}
+.level-details-backdrop.open {
+    display: flex;
+}
+.level-details {
+    position: relative;
+    width: min(100%, 520px);
+    max-height: min(85vh, 720px);
+    overflow-y: auto;
+    border: 1px solid #3b6388;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #14263d, #09111f 75%);
+    box-shadow: 0 20px 70px rgba(0,0,0,.55), 0 0 24px rgba(57,160,255,.12);
+    color: #f5f7ff;
+}
+.level-details-image {
+    display: block;
+    width: 100%;
+    max-height: 230px;
+    object-fit: cover;
+    background: #0b1322;
+}
+.level-details-content {
+    padding: 20px;
+}
+.level-details-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 50%;
+    background: rgba(4,10,20,.8);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+.level-details h2 {
+    margin: 0 44px 8px 0;
+    font-size: 27px;
+    line-height: 1.2;
+}
+.level-details-rank {
+    color: #65cfff;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.level-details-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin: 18px 0;
+}
+.level-details-stat {
+    padding: 11px;
+    border: 1px solid #2b405b;
+    border-radius: 9px;
+    background: rgba(17,28,45,.75);
+}
+.level-details-stat span {
+    display: block;
+    color: #92a8c4;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+.level-details-stat strong {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+.level-details-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 14px 0 18px;
+}
+.level-details-tags span {
+    padding: 5px 8px;
+    border: 1px solid rgba(94,203,255,.4);
+    border-radius: 6px;
+    color: #9bdbff;
+    background: rgba(17,52,77,.45);
+    font-size: 11px;
+    font-weight: 700;
+}
+.level-details-watch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 15px;
+    border-radius: 8px;
+    background: #2474bd;
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+}
+.level-details-watch:hover {
+    background: #328ddd;
+}
+@media (max-width: 480px) {
+    .level-details-content { padding: 16px; }
+    .level-details h2 { font-size: 23px; }
+    .level-details-image { max-height: 175px; }
+}
+
 .filter-panel {
     display: none;
     padding: 11px;
@@ -553,7 +678,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">GRIEF</h2>
-                <div class="level-creator">IceDCCave <span class="level-separator">|</span> <span class="verifier">Doggie</span></div>
+                <div class="level-creator">icedcave <span class="level-separator">|</span> <span class="verifier">Verified by Doggie</span></div>
                 <div class="level-points">250.00 — <strong>1000.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">High CPS</span><span class="level-tag">Fast-Paced</span></div>
             </div>
@@ -572,7 +697,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">Society</h2>
-                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-creator">Neomarbilan</div>
                 <div class="level-points">240.00 — <strong>960.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
@@ -589,7 +714,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">Thinking Space II</h2>
-                <div class="level-creator">CairoX</div>
+                <div class="level-creator">CairoX <span class="level-separator">|</span> <span class="verifier">Verified by Zoink</span></div>
                 <div class="level-points">230.00 — <strong>920.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Precision</span></div>
             </div>
@@ -606,7 +731,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">Amethyst</h2>
-                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-creator">iMist <span class="level-separator">|</span> <span class="verifier">Verified by wPopoff</span></div>
                 <div class="level-points">220.00 — <strong>880.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
@@ -623,7 +748,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">Flamewall</h2>
-                <div class="level-creator">Narwall</div>
+                <div class="level-creator">Narwall <span class="level-separator">|</span> <span class="verifier">Verified by Cuatrocientos</span></div>
                 <div class="level-points">210.00 — <strong>840.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Fast-Paced</span></div>
             </div>
@@ -640,7 +765,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">Tidal Wave</h2>
-                <div class="level-creator">OniLink</div>
+                <div class="level-creator">OniLink <span class="level-separator">|</span> <span class="verifier">Verified by Zoink</span></div>
                 <div class="level-points">200.00 — <strong>800.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span><span class="level-tag">Endurance</span></div>
             </div>
@@ -657,7 +782,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">Green Bullet</h2>
-                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-creator">cherryteam</div>
                 <div class="level-points">190.00 — <strong>760.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Timing</span></div>
             </div>
@@ -674,7 +799,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">ORBIT</h2>
-                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-creator">MindCap</div>
                 <div class="level-points">180.00 — <strong>720.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
@@ -691,7 +816,7 @@ body {
             </a>
             <div class="level-info">
                 <h2 class="level-name">Antarctic Lights</h2>
-                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-creator">declanlc <span class="level-separator">|</span> <span class="verifier">Verified by Axinity</span></div>
                 <div class="level-points">170.00 — <strong>680.00</strong> points</div>
                 <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
@@ -721,6 +846,26 @@ body {
     </section>
 
     <div class="no-results" id="no-results">No levels match your search or filters.</div>
+
+<div class="level-details-backdrop" id="level-details-backdrop" role="dialog" aria-modal="true" aria-labelledby="level-details-title">
+    <section class="level-details">
+        <button class="level-details-close" id="level-details-close" type="button" aria-label="Close level details">&times;</button>
+        <img class="level-details-image" id="level-details-image" src="" alt="">
+        <div class="level-details-content">
+            <div class="level-details-rank" id="level-details-rank"></div>
+            <h2 id="level-details-title"></h2>
+            <div id="level-details-creator"></div>
+            <div class="level-details-meta">
+                <div class="level-details-stat"><span>PulseFrame points</span><strong id="level-details-points"></strong></div>
+                <div class="level-details-stat"><span>Difficulty</span><strong>Extreme Demon</strong></div>
+                <div class="level-details-stat"><span>Verifier</span><strong id="level-details-verifier"></strong></div>
+                <div class="level-details-stat"><span>Mode</span><strong id="level-details-mode"></strong></div>
+            </div>
+            <div class="level-details-tags" id="level-details-tags"></div>
+            <a class="level-details-watch" id="level-details-watch" href="#" target="_blank" rel="noopener noreferrer">▶ Watch level video</a>
+        </div>
+    </section>
+</div>
 </main>
 
 <footer><p>© 2026 PulseFrame List</p></footer>
@@ -797,6 +942,97 @@ document.querySelectorAll(".level-thumb img").forEach(img => {
         img.parentElement.style.background =
             "radial-gradient(circle, #16385b, #0b1322)";
     });
+});
+
+// Open a details panel when a level card is clicked.
+const detailsBackdrop = document.getElementById("level-details-backdrop");
+const closeDetailsButton = document.getElementById("level-details-close");
+let lastFocusedLevel = null;
+
+const levelDetails = {
+    "GRIEF": { creator: "icedcave", verifier: "Doggie", id: "149992717" },
+    "Society": { creator: "Neomarbilan", verifier: "Zoink", id: "" },
+    "Thinking Space II": { creator: "CairoX (host/publisher); DrCuber and NineDice (co-hosts)", verifier: "Zoink", id: "119544028" },
+    "Amethyst": { creator: "iMist", verifier: "wPopoff", id: "119550490" },
+    "Flamewall": { creator: "Narwall (host); valentine and Surjaco (co-hosts)", verifier: "Cuatrocientos", id: "126242564" },
+    "Tidal Wave": { creator: "OniLink", verifier: "Zoink", id: "89105569" },
+    "Green Bullet": { creator: "cherryteam", verifier: "Unknown", id: "" },
+    "ORBIT": { creator: "MindCap", verifier: "Unknown", id: "" },
+    "Antarctic Lights": { creator: "declanlc (host); SkyJax, tolstyh and Arcturus", verifier: "Axinity", id: "144988390" },
+    "Nullscapes": { creator: "Kiba", verifier: "Unknown", id: "113161377" }
+};
+
+function openLevelDetails(row) {
+    const title = row.querySelector(".level-name")?.textContent.trim() || "Level";
+    const rank = row.querySelector(".level-rank")?.textContent.trim() || "";
+    const creator = levelDetails[title] || { creator: row.querySelector(".level-creator")?.textContent.trim() || "Unknown", verifier: "Unknown", id: "" };
+    const pointText = row.querySelector(".level-points")?.textContent.trim() || "—";
+    const thumb = row.querySelector(".level-thumb img");
+    const videoLink = row.querySelector(".level-thumb");
+    const tags = [...row.querySelectorAll(".level-tags span")].map(tag => tag.textContent.trim());
+
+    document.getElementById("level-details-title").textContent = title;
+    document.getElementById("level-details-rank").textContent = "PulseFrame rank " + rank;
+    document.getElementById("level-details-creator").textContent = "By " + creator.creator;
+    document.getElementById("level-details-points").textContent = pointText;
+    document.getElementById("level-details-verifier").textContent = creator.verifier;
+    document.getElementById("level-details-mode").textContent = row.dataset.mode === "platformer" ? "Platformer" : "Classic";
+    document.getElementById("level-details-image").src = thumb?.src || "";
+    document.getElementById("level-details-image").alt = title + " level thumbnail";
+    document.getElementById("level-details-tags").replaceChildren(...tags.map(tag => {
+        const pill = document.createElement("span");
+        pill.textContent = tag;
+        return pill;
+    }));
+    const watch = document.getElementById("level-details-watch");
+    watch.href = videoLink?.href || "#";
+    watch.style.display = videoLink?.href ? "inline-flex" : "none";
+
+    let idLine = document.getElementById("level-details-id");
+    if (!idLine) {
+        idLine = document.createElement("div");
+        idLine.id = "level-details-id";
+        idLine.className = "level-details-stat";
+        idLine.style.marginTop = "10px";
+        document.querySelector(".level-details-content").insertBefore(idLine, document.querySelector(".level-details-tags"));
+    }
+    idLine.innerHTML = creator.id ? "<span>Geometry Dash level ID</span><strong></strong>" : "";
+    if (creator.id) idLine.querySelector("strong").textContent = creator.id;
+
+    lastFocusedLevel = row;
+    detailsBackdrop.classList.add("open");
+    document.body.style.overflow = "hidden";
+    closeDetailsButton.focus();
+}
+
+function closeLevelDetails() {
+    detailsBackdrop.classList.remove("open");
+    document.body.style.overflow = "";
+    lastFocusedLevel?.focus();
+}
+
+rows.forEach(row => {
+    row.tabIndex = 0;
+    row.setAttribute("role", "button");
+    row.setAttribute("aria-label", "Show details for " + (row.querySelector(".level-name")?.textContent.trim() || "level"));
+    row.addEventListener("click", event => {
+        if (event.target.closest("a, button")) return;
+        openLevelDetails(row);
+    });
+    row.addEventListener("keydown", event => {
+        if ((event.key === "Enter" || event.key === " ") && event.target === row) {
+            event.preventDefault();
+            openLevelDetails(row);
+        }
+    });
+});
+
+closeDetailsButton.addEventListener("click", closeLevelDetails);
+detailsBackdrop.addEventListener("click", event => {
+    if (event.target === detailsBackdrop) closeLevelDetails();
+});
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && detailsBackdrop.classList.contains("open")) closeLevelDetails();
 });
 
 updateRows();
