@@ -26,7 +26,7 @@
 .feature-value{margin-left:auto;color:#62d7ff;font-weight:900;text-align:right;font-size:13px}
 .mode-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .mode-card{padding:16px;border-radius:13px;border:1px solid #24354e;background:#0d1421}
-.mode-top{display:flex;align-items:center;gap:9px}.mode-icon{font-size:21px}.mode-card h3{font-size:14px}.mode-card p{font-size:11px;color:#8292aa;margin-top:9px}.mode-winner{font-weight:800;color:#dceaff;font-size:13px;margin-top:12px;overflow-wrap:anywhere}.mode-status{font-size:10px;color:#63caff;margin-top:5px}
+.mode-top{display:flex;align-items:center;gap:9px}.mode-icon{font-size:21px}.mode-icon-img{width:30px;height:30px;object-fit:contain;image-rendering:auto;flex-shrink:0}.mode-card h3{font-size:14px}.mode-card p{font-size:11px;color:#8292aa;margin-top:9px}.mode-winner{font-weight:800;color:#dceaff;font-size:13px;margin-top:12px;overflow-wrap:anywhere}.mode-status{font-size:10px;color:#63caff;margin-top:5px}
 .rank-table{border:1px solid #263650;border-radius:15px;overflow:hidden;background:#0c111c}
 .rank-table-head,.rank-row{display:grid;grid-template-columns:65px minmax(150px,1.5fr) minmax(130px,1fr) minmax(90px,.7fr);gap:12px;align-items:center;padding:14px 18px}
 .rank-table-head{background:#111c2c;color:#8396b3;text-transform:uppercase;letter-spacing:1.2px;font-size:10px;font-weight:800}
@@ -77,11 +77,11 @@
 /* Add only verified, approved data here. Mode values: Cube, Ship, Wave, UFO, Ball, Robot, Spider, Swing. */
 const pulseFramePlayers = [];
 const modes = [
- {name:'Cube',icon:'◼'},{name:'Ship',icon:'🚀'},{name:'Wave',icon:'〰️'},{name:'UFO',icon:'🛸'},
- {name:'Ball',icon:'⚽'},{name:'Robot',icon:'🤖'},{name:'Spider',icon:'🕷️'},{name:'Swing',icon:'↔️'}
+ {name:'Cube',image:'../assest/cube.jpg'},{name:'Ship',icon:'🚀'},{name:'Wave',image:'../assest/wave.JPG'},{name:'UFO',image:'../assest/ufo.JPG'},
+ {name:'Ball',image:'../assest/ball.PNG'},{name:'Robot',image:'../assest/robot.JPG'},{name:'Spider',image:'../assest/spider.PNG'},{name:'Swing',icon:'↔️'}
 ];
 const modeGrid=document.getElementById('modeGrid');
-modeGrid.innerHTML=modes.map(m=>'<article class="mode-card"><div class="mode-top"><span class="mode-icon">'+m.icon+'</span><h3>Best '+m.name+' Player</h3></div><p>Top verified '+m.name.toLowerCase()+' specialist</p><div class="mode-winner">Not yet ranked</div><div class="mode-status">Awaiting verified data</div></article>').join('');
+modeGrid.innerHTML=modes.map(m=>'<article class="mode-card"><div class="mode-top">'+(m.image?'<img class="mode-icon-img" src="'+m.image+'" alt="'+m.name+' icon">':'<span class="mode-icon">'+m.icon+'</span>')+'<h3>Best '+m.name+' Player</h3></div><p>Top verified '+m.name.toLowerCase()+' specialist</p><div class="mode-winner">Not yet ranked</div><div class="mode-status">Awaiting verified data</div></article>').join('');
 const rows=document.getElementById('rankRows'),search=document.getElementById('playerSearch'),sort=document.getElementById('rankSort'),count=document.getElementById('playerCount');
 function renderPlayers(){
  const query=search.value.trim().toLowerCase();
