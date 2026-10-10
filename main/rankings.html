@@ -1,108 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PulseFrame player rankings for verified Extreme Demon completions.">
-    <title>Player Rankings | PulseFrame</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .rankings-wrap{max-width:1120px;margin:42px auto 70px;padding:0 22px}
-        .rankings-hero{padding:34px;border:1px solid #263650;border-radius:20px;background:linear-gradient(135deg,#172943,#0b111e 70%);margin-bottom:24px}
-        .eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:800;color:#69baff}
-        .rankings-hero h1{font-size:clamp(30px,5vw,46px);margin:12px 0}
-        .rankings-hero h1 span{color:#62d7ff}
-        .rankings-hero p{color:#aab7cc;line-height:1.7;max-width:720px}
-        .ranking-notice{margin-top:18px;padding:12px 14px;border-radius:10px;background:#101d2d;border:1px solid #29415d;color:#b8c8dc;font-size:13px}
-        .rank-controls{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
-        .rank-controls input,.rank-controls select{min-height:44px;background:#0d1421;color:#edf5ff;border:1px solid #293952;border-radius:10px;padding:0 13px;font:inherit}
-        .rank-controls input{flex:1;min-width:190px}
-        .rank-controls select{min-width:170px}
-        .rank-table{border:1px solid #263650;border-radius:15px;overflow:hidden;background:#0c111c}
-        .rank-table-head,.rank-row{display:grid;grid-template-columns:70px minmax(150px,1.5fr) minmax(100px,1fr) minmax(100px,.8fr);gap:12px;align-items:center;padding:15px 20px}
-        .rank-table-head{background:#111c2c;color:#8396b3;text-transform:uppercase;letter-spacing:1.2px;font-size:11px;font-weight:800}
-        .rank-row{border-top:1px solid #1b2638;min-height:76px}
-        .rank-number{font-size:18px;font-weight:900;color:#8291a8}
-        .rank-row:nth-child(2) .rank-number{color:#ffd75e}
-        .rank-row:nth-child(3) .rank-number{color:#d7e0ed}
-        .rank-row:nth-child(4) .rank-number{color:#d79a70}
-        .rank-player{display:flex;align-items:center;gap:12px;min-width:0}
-        .rank-avatar{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#203a5c,#101b2b);border:1px solid #355071;font-size:19px;flex-shrink:0}
-        .rank-player strong{display:block;overflow-wrap:anywhere}
-        .rank-player small{display:block;color:#8190a8;margin-top:4px;font-size:11px}
-        .rank-points{font-weight:800;color:#62d7ff}
-        .rank-hardest{color:#d5deed;font-size:13px}
-        .empty-state{padding:28px;text-align:center;color:#8c9ab0}
-        .rank-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8291a8;font-size:12px;margin-top:13px}
-        @media(max-width:650px){.rankings-wrap{margin-top:24px;padding:0 13px}.rankings-hero{padding:24px 19px}.rank-table-head,.rank-row{grid-template-columns:42px minmax(125px,1fr) 76px;gap:8px;padding:13px 10px}.rank-table-head span:nth-child(3),.rank-row .rank-hardest{display:none}.rank-points{text-align:right}.rank-table-head span:last-child{text-align:right}.rank-player{gap:8px}.rank-avatar{width:35px;height:35px;font-size:16px}}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PulseFrame Extreme Demon player rankings: overall, best by game mode, and most completions.">
+<title>Player Rankings | PulseFrame</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.rankings-wrap{max-width:1150px;margin:40px auto 70px;padding:0 22px}
+.rankings-hero{padding:34px;border:1px solid #263650;border-radius:20px;background:linear-gradient(135deg,#172943,#0b111e 70%);margin-bottom:25px}
+.eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:800;color:#69baff}
+.rankings-hero h1{font-size:clamp(30px,5vw,46px);margin:12px 0}.rankings-hero h1 span{color:#62d7ff}
+.rankings-hero p{color:#aab7cc;line-height:1.7;max-width:760px}
+.rankings-note{margin-top:16px;padding:12px 14px;border-radius:10px;background:#101d2d;border:1px solid #29415d;color:#b8c8dc;font-size:13px}
+.rank-section{margin-top:30px}.rank-section-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}.rank-section-heading h2{font-size:23px;margin-top:6px}.rank-section-heading p{font-size:12px;color:#8190a8}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.feature-card{position:relative;overflow:hidden;padding:21px;border-radius:16px;border:1px solid #293b55;background:linear-gradient(145deg,#121f32,#0b111c);min-height:215px}
+.feature-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 100% 0%,#3e9dff18,transparent 55%);pointer-events:none}
+.feature-card>*{position:relative}.feature-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:12px;background:#1a304b;border:1px solid #355477;font-size:21px;margin-bottom:17px}
+.feature-label{color:#71caff;text-transform:uppercase;letter-spacing:1.4px;font-size:10px;font-weight:800}
+.feature-card h3{font-size:18px;margin:7px 0}.feature-card p{font-size:12px;color:#8e9eb5;line-height:1.6}
+.feature-player{display:flex;align-items:center;gap:10px;margin-top:17px;padding-top:14px;border-top:1px solid #26344a}
+.feature-avatar{width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:#203a5c;border:1px solid #355071;font-weight:900}
+.feature-player strong{display:block;font-size:14px}.feature-player small{display:block;color:#8e9eb5;margin-top:4px;font-size:11px}
+.feature-value{margin-left:auto;color:#62d7ff;font-weight:900;text-align:right;font-size:13px}
+.mode-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.mode-card{padding:16px;border-radius:13px;border:1px solid #24354e;background:#0d1421}
+.mode-top{display:flex;align-items:center;gap:9px}.mode-icon{font-size:21px}.mode-card h3{font-size:14px}.mode-card p{font-size:11px;color:#8292aa;margin-top:9px}.mode-winner{font-weight:800;color:#dceaff;font-size:13px;margin-top:12px;overflow-wrap:anywhere}.mode-status{font-size:10px;color:#63caff;margin-top:5px}
+.rank-table{border:1px solid #263650;border-radius:15px;overflow:hidden;background:#0c111c}
+.rank-table-head,.rank-row{display:grid;grid-template-columns:65px minmax(150px,1.5fr) minmax(130px,1fr) minmax(90px,.7fr);gap:12px;align-items:center;padding:14px 18px}
+.rank-table-head{background:#111c2c;color:#8396b3;text-transform:uppercase;letter-spacing:1.2px;font-size:10px;font-weight:800}
+.rank-row{border-top:1px solid #1b2638;min-height:70px}.rank-number{font-size:17px;font-weight:900;color:#8291a8}
+.rank-row:nth-child(2) .rank-number{color:#ffd75e}.rank-row:nth-child(3) .rank-number{color:#d7e0ed}.rank-row:nth-child(4) .rank-number{color:#d79a70}
+.rank-player{display:flex;align-items:center;gap:10px;min-width:0}.rank-avatar{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,#203a5c,#101b2b);border:1px solid #355071;flex-shrink:0}.rank-player strong{display:block;overflow-wrap:anywhere}.rank-player small{display:block;color:#8190a8;margin-top:4px;font-size:11px}
+.rank-points{font-weight:800;color:#62d7ff}.rank-hardest{color:#d5deed;font-size:12px}
+.rank-controls{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.rank-controls input,.rank-controls select{min-height:42px;background:#0d1421;color:#edf5ff;border:1px solid #293952;border-radius:10px;padding:0 12px;font:inherit}.rank-controls input{flex:1;min-width:180px}.empty-state{padding:25px;text-align:center;color:#8c9ab0}.rank-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8291a8;font-size:12px;margin-top:12px}
+@media(max-width:800px){.feature-grid{grid-template-columns:1fr}.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.rankings-wrap{margin-top:22px;padding:0 12px}.rankings-hero{padding:23px 18px}.mode-grid{grid-template-columns:1fr 1fr}.rank-table-head,.rank-row{grid-template-columns:36px minmax(100px,1fr) 75px;gap:7px;padding:12px 8px}.rank-table-head span:nth-child(3),.rank-row .rank-hardest{display:none}.rank-points{text-align:right}.rank-table-head span:last-child{text-align:right}.rank-player{gap:7px}.rank-avatar{width:32px;height:32px}}
+</style>
 </head>
 <body>
 <header class="site-header">
-    <a href="../index.html" class="brand"><div class="brand-icon">⚡</div><div class="logo">Pulse<span>Frame</span></div></a>
-    <nav>
-        <a href="../index.html">Home</a>
-        <a href="rankings.html" aria-current="page">Rankings</a>
-        <a href="progression.html">Progression</a>
-        <a href="levels.html">Levels</a>
-        <a href="profile.html">Profile</a>
-    </nav>
-    <button class="menu-button" aria-label="Open menu">☰</button>
+<a href="../index.html" class="brand"><div class="brand-icon">⚡</div><div class="logo">Pulse<span>Frame</span></div></a>
+<nav><a href="../index.html">Home</a><a href="rankings.html" aria-current="page">Rankings</a><a href="progression.html">Progression</a><a href="levels.html">Levels</a><a href="profile.html">Profile</a></nav>
+<button class="menu-button" aria-label="Open menu">☰</button>
 </header>
 <main class="rankings-wrap">
-    <section class="rankings-hero">
-        <div class="eyebrow">PULSEFRAME • PLAYER LEADERBOARD</div>
-        <h1>Extreme Demon <span>Rankings</span></h1>
-        <p>Track player progression through verified Extreme Demon completions. Rankings will be based on accepted proof and the PulseFrame scoring system.</p>
-        <div class="ranking-notice">⚠️ The leaderboard is in development. No player scores or placements are official until submissions have been reviewed and published.</div>
-    </section>
-    <div class="section-heading">
-        <div><span class="section-label">LEADERBOARD</span><h2>Top Players</h2></div>
-    </div>
-    <div class="rank-controls">
-        <input id="playerSearch" type="search" placeholder="Search player..." aria-label="Search players">
-        <select id="rankSort" aria-label="Sort rankings">
-            <option value="points">Sort: Total points</option>
-            <option value="hardest">Sort: Hardest completion</option>
-            <option value="name">Sort: Player name</option>
-        </select>
-    </div>
-    <section class="rank-table" aria-label="Player leaderboard">
-        <div class="rank-table-head"><span>Rank</span><span>Player</span><span>Hardest verified</span><span>Points</span></div>
-        <div id="rankRows">
-            <div class="empty-state">No verified player entries yet. Be the first to submit an Extreme Demon completion.</div>
-        </div>
-    </section>
-    <div class="rank-footer"><span>Only approved Extreme Demon completions count.</span><span id="playerCount">0 players</span></div>
+<section class="rankings-hero">
+<div class="eyebrow">PULSEFRAME • PLAYER LEADERBOARD</div>
+<h1>Player <span>Rankings</span></h1>
+<p>Three ways to stand out: the best overall Extreme Demon player, the best player in each game mode, and the player with the most verified Extreme Demon completions.</p>
+<div class="rankings-note">⚠️ Rankings are in development. Featured spots remain unclaimed until PulseFrame verifies player data and publishes official results.</div>
+</section>
+<section class="rank-section">
+<div class="rank-section-heading"><div><span class="section-label">THE BIG THREE</span><h2>Featured Rankings</h2></div></div>
+<div class="feature-grid">
+<article class="feature-card"><div class="feature-icon">👑</div><div class="feature-label">Overall #1</div><h3>Best Overall Player</h3><p>Recognizes the strongest all-around Extreme Demon player using verified achievements and the PulseFrame scoring criteria.</p><div class="feature-player"><div class="feature-avatar">?</div><div><strong>Not yet ranked</strong><small>Awaiting verified player data</small></div><div class="feature-value">—</div></div></article>
+<article class="feature-card"><div class="feature-icon">🎯</div><div class="feature-label">Mode Specialists</div><h3>Best by Game Mode</h3><p>Separate leaders for Cube, Ship, Wave, UFO, Ball, Robot, Spider, and Swing.</p><div class="feature-player"><div class="feature-avatar">8×</div><div><strong>8 categories</strong><small>One leader per mode</small></div></div></article>
+<article class="feature-card"><div class="feature-icon">🏆</div><div class="feature-label">Completion Record</div><h3>Most Completions</h3><p>Celebrates the player with the highest number of unique, verified Extreme Demon completions.</p><div class="feature-player"><div class="feature-avatar">?</div><div><strong>Not yet ranked</strong><small>Awaiting verified player data</small></div><div class="feature-value">—</div></div></article>
+</div>
+</section>
+<section class="rank-section">
+<div class="rank-section-heading"><div><span class="section-label">SPECIALISTS</span><h2>Best Player by Game Mode</h2></div><p>8 skill categories</p></div>
+<div class="mode-grid" id="modeGrid"></div>
+</section>
+<section class="rank-section">
+<div class="rank-section-heading"><div><span class="section-label">ALL PLAYERS</span><h2>Overall Leaderboard</h2></div></div>
+<div class="rank-controls"><input id="playerSearch" type="search" placeholder="Search player..." aria-label="Search players"><select id="rankSort" aria-label="Sort rankings"><option value="points">Sort: Overall points</option><option value="hardest">Sort: Hardest completion</option><option value="completions">Sort: Most completions</option><option value="name">Sort: Player name</option></select></div>
+<section class="rank-table" aria-label="Player leaderboard"><div class="rank-table-head"><span>Rank</span><span>Player</span><span>Hardest verified</span><span>Points</span></div><div id="rankRows"><div class="empty-state">No verified player entries yet. Submit an Extreme Demon completion to get started.</div></div></section>
+<div class="rank-footer"><span>Only approved, unique Extreme Demon completions count.</span><span id="playerCount">0 players</span></div>
+</section>
 </main>
 <footer><p>© 2026 PulseFrame List</p></footer>
 <script src="../js/script.js"></script>
 <script>
-/* Populate this array only with verified, approved player data. */
+/* Add only verified, approved data here. Mode values: Cube, Ship, Wave, UFO, Ball, Robot, Spider, Swing. */
 const pulseFramePlayers = [];
-const rows = document.getElementById('rankRows');
-const search = document.getElementById('playerSearch');
-const sort = document.getElementById('rankSort');
-const count = document.getElementById('playerCount');
+const modes = [
+ {name:'Cube',icon:'◼'},{name:'Ship',icon:'🚀'},{name:'Wave',icon:'〰️'},{name:'UFO',icon:'🛸'},
+ {name:'Ball',icon:'⚽'},{name:'Robot',icon:'🤖'},{name:'Spider',icon:'🕷️'},{name:'Swing',icon:'↔️'}
+];
+const modeGrid=document.getElementById('modeGrid');
+modeGrid.innerHTML=modes.map(m=>'<article class="mode-card"><div class="mode-top"><span class="mode-icon">'+m.icon+'</span><h3>Best '+m.name+' Player</h3></div><p>Top verified '+m.name.toLowerCase()+' specialist</p><div class="mode-winner">Not yet ranked</div><div class="mode-status">Awaiting verified data</div></article>').join('');
+const rows=document.getElementById('rankRows'),search=document.getElementById('playerSearch'),sort=document.getElementById('rankSort'),count=document.getElementById('playerCount');
 function renderPlayers(){
-    const query = search.value.trim().toLowerCase();
-    const players = pulseFramePlayers.filter(p => p.name.toLowerCase().includes(query));
-    players.sort((a,b) => {
-        if(sort.value === 'name') return a.name.localeCompare(b.name);
-        if(sort.value === 'hardest') return (a.hardestRank ?? Infinity) - (b.hardestRank ?? Infinity);
-        return b.points - a.points;
-    });
-    count.textContent = players.length + (players.length === 1 ? ' player' : ' players');
-    if(!players.length){
-        rows.innerHTML = '<div class="empty-state">No verified players to show yet.</div>';
-        return;
-    }
-    rows.innerHTML = players.map((p,i) => '<div class="rank-row"><span class="rank-number">#'+(i+1)+'</span><div class="rank-player"><div class="rank-avatar" aria-hidden="true">◆</div><div><strong>'+escapeHTML(p.name)+'</strong><small>Verified player</small></div></div><span class="rank-hardest">'+escapeHTML(p.hardest || 'Not listed')+'</span><span class="rank-points">'+Number(p.points).toLocaleString()+' pts</span></div>').join('');
+ const query=search.value.trim().toLowerCase();
+ const players=pulseFramePlayers.filter(p=>p.name.toLowerCase().includes(query));
+ players.sort((a,b)=>{
+  if(sort.value==='name')return a.name.localeCompare(b.name);
+  if(sort.value==='hardest')return (a.hardestRank??Infinity)-(b.hardestRank??Infinity);
+  if(sort.value==='completions')return b.completions-a.completions;
+  return b.points-a.points;
+ });
+ count.textContent=players.length+(players.length===1?' player':' players');
+ if(!players.length){rows.innerHTML='<div class="empty-state">No verified players to show yet.</div>';return;}
+ rows.innerHTML=players.map((p,i)=>'<div class="rank-row"><span class="rank-number">#'+(i+1)+'</span><div class="rank-player"><div class="rank-avatar" aria-hidden="true">◆</div><div><strong>'+escapeHTML(p.name)+'</strong><small>'+Number(p.completions||0)+' verified completions</small></div></div><span class="rank-hardest">'+escapeHTML(p.hardest||'Not listed')+'</span><span class="rank-points">'+Number(p.points||0).toLocaleString()+' pts</span></div>').join('');
 }
 function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-search.addEventListener('input',renderPlayers);
-sort.addEventListener('change',renderPlayers);
-renderPlayers();
+search.addEventListener('input',renderPlayers);sort.addEventListener('change',renderPlayers);renderPlayers();
 </script>
 </body>
 </html>
