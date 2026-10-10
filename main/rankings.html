@@ -77,8 +77,8 @@
 /* Add only verified, approved data here. Mode values: Cube, Ship, Wave, UFO, Ball, Robot, Spider, Swing. */
 const pulseFramePlayers = [];
 const modes = [
- {name:'Cube',image:'../assest/cube.jpg'},{name:'Ship',icon:'🚀'},{name:'Wave',image:'../assest/wave.JPG'},{name:'UFO',image:'../assest/ufo.JPG'},
- {name:'Ball',image:'../assest/ball.PNG'},{name:'Robot',image:'../assest/robot.JPG'},{name:'Spider',image:'../assest/spider.PNG'},{name:'Swing',icon:'↔️'}
+ {name:'Cube',image:'../assest/cube.png'},{name:'Ship',image:'../assest/ship.png'},{name:'Wave',image:'../assest/wave.png'},{name:'UFO',image:'../assest/ufo.png'},
+ {name:'Ball',image:'../assest/ball.png'},{name:'Robot',image:'../assest/robot.png'},{name:'Spider',image:'../assest/spider.png'},{name:'Swing',image:'../assest/swing.png'}
 ];
 const modeGrid=document.getElementById('modeGrid');
 modeGrid.innerHTML=modes.map(m=>'<article class="mode-card"><div class="mode-top">'+(m.image?'<img class="mode-icon-img" src="'+m.image+'" alt="'+m.name+' icon">':'<span class="mode-icon">'+m.icon+'</span>')+'<h3>Best '+m.name+' Player</h3></div><p>Top verified '+m.name.toLowerCase()+' specialist</p><div class="mode-winner">Not yet ranked</div><div class="mode-status">Awaiting verified data</div></article>').join('');
