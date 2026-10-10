@@ -4,52 +4,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Explore Levels - PulseFrame</title>
 <link rel="stylesheet" href="../css/style.css">
 
 <style>
-/* PULSEFRAME LEVEL DATABASE */
-
 body {
-    background:
-        radial-gradient(ellipse at 50% 20%, rgba(27,70,130,.20), transparent 55%),
-        #080d18;
+    background: radial-gradient(ellipse at 50% 10%, rgba(27,70,130,.16), transparent 55%), #080d18;
 }
 
 .levels-page {
-    position: relative;
-    max-width: 1150px;
+    max-width: 1100px;
     margin: auto;
-    padding: 38px 20px 70px;
+    padding: 26px 20px 55px;
     min-height: 80vh;
 }
 
-.levels-page > * {
-    position: relative;
-}
-
-/* Page heading */
-
 .levels-header {
     text-align: center;
-    padding: 25px 12px 32px;
+    padding: 15px 10px 25px;
 }
 
 .pf-eyebrow {
     color: #65bfff;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 4px;
-    margin-bottom: 13px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
 }
 
 .levels-header h1 {
-    font-size: clamp(32px, 6vw, 52px);
+    font-size: clamp(30px, 5vw, 44px);
     line-height: 1.15;
     font-weight: 800;
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
     color: #f1f4ff;
+    margin: 0;
 }
 
 .levels-header h1 span {
@@ -58,73 +47,56 @@ body {
 
 .levels-header p {
     color: #a0aec4;
-    line-height: 1.7;
-    font-size: 15px;
-    max-width: 600px;
-    margin: 14px auto 0;
+    line-height: 1.6;
+    font-size: 14px;
+    max-width: 570px;
+    margin: 10px auto 0;
 }
-
-/* Animated neon wave */
 
 .pulse-line {
-    width: min(75%, 480px);
-    height: 3px;
-    margin: 27px auto 0;
+    width: min(65%, 400px);
+    height: 2px;
+    margin: 20px auto 0;
     border-radius: 50%;
     background: linear-gradient(90deg, #167aff, #63e7ff, #167aff);
-    background-size: 200% 100%;
-    box-shadow: 0 0 12px #299eff, 0 0 30px rgba(40,160,255,.5);
-    animation: neonWave 3s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(41,158,255,.7);
+    animation: pulseGlow 3s ease-in-out infinite;
 }
 
-@keyframes neonWave {
-    0%,100% {
-        background-position: 0% 50%;
-        transform: scaleX(.86);
-        opacity: .75;
-    }
-    50% {
-        background-position: 100% 50%;
-        transform: scaleX(1);
-        opacity: 1;
-        box-shadow: 0 0 18px #42cfff, 0 0 38px rgba(40,160,255,.65);
-    }
+@keyframes pulseGlow {
+    0%,100% { opacity: .65; transform: scaleX(.9); }
+    50% { opacity: 1; transform: scaleX(1); }
 }
-
-/* Tabs */
 
 .level-tabs {
     display: flex;
-    gap: 10px;
-    margin-bottom: 18px;
+    gap: 8px;
+    margin-bottom: 13px;
 }
 
 .level-tab {
     border: 1px solid #2c3b54;
-    background: rgba(20,31,49,.9);
+    background: #111c2d;
     color: #aab8ce;
-    padding: 11px 23px;
-    border-radius: 11px;
+    padding: 9px 18px;
+    border-radius: 8px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
-    transition: .2s ease;
+    transition: .2s;
 }
 
 .level-tab:hover,
 .level-tab.active {
     color: white;
-    background: #327ce9;
+    background: #245a9a;
     border-color: #5ecbff;
-    box-shadow: 0 0 17px rgba(48,139,255,.2);
 }
-
-/* Search and filters */
 
 .level-tools {
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 9px;
+    margin-bottom: 14px;
 }
 
 .search-wrap {
@@ -135,7 +107,7 @@ body {
 
 .search-wrap .search-icon {
     position: absolute;
-    left: 17px;
+    left: 13px;
     top: 50%;
     transform: translateY(-50%);
     color: #8395b0;
@@ -145,14 +117,14 @@ body {
 
 .level-search {
     width: 100%;
-    min-height: 54px;
-    padding: 14px 16px 14px 46px;
-    border: 1px solid #34445d;
-    border-radius: 13px;
-    background: rgba(24,36,56,.92);
+    min-height: 43px;
+    padding: 10px 12px 10px 38px;
+    border: 1px solid #2d405b;
+    border-radius: 9px;
+    background: #111c2d;
     color: white;
     font: inherit;
-    font-size: 15px;
+    font-size: 14px;
     outline: none;
 }
 
@@ -162,17 +134,18 @@ body {
 
 .level-search:focus {
     border-color: #5ecbff;
-    box-shadow: 0 0 17px rgba(94,203,255,.14);
+    box-shadow: 0 0 10px rgba(94,203,255,.12);
 }
 
 .filter-button {
-    min-height: 54px;
-    padding: 0 20px;
-    border: 1px solid #34445d;
-    border-radius: 13px;
-    background: rgba(24,36,56,.92);
+    min-height: 43px;
+    padding: 0 14px;
+    border: 1px solid #2d405b;
+    border-radius: 9px;
+    background: #111c2d;
     color: #dbe8fb;
     font-weight: 700;
+    font-size: 13px;
     cursor: pointer;
 }
 
@@ -182,110 +155,89 @@ body {
     color: #65cfff;
 }
 
-/* Ranking list */
-
 .level-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
-/* Level rows */
-
+/* Compact level cards */
 .level-row {
     position: relative;
     display: grid;
-    grid-template-columns: 38px 126px minmax(0,1fr) auto;
+    grid-template-columns: 32px 104px minmax(0,1fr) auto;
     align-items: center;
-    gap: 17px;
-    min-height: 142px;
-    padding: 17px;
-    border: 1px solid #344157;
-    border-radius: 22px;
-    background: rgba(29,41,60,.96);
+    gap: 13px;
+    min-height: 0;
+    padding: 10px 13px;
+    border: 1px solid #293a52;
+    border-radius: 12px;
+    background: rgba(17,28,45,.96);
     overflow: hidden;
-    isolation: isolate;
-    transition: border-color .25s ease, transform .25s ease,
-                box-shadow .25s ease;
-    animation: rowEnter .45s ease both;
+    transition: border-color .2s, background .2s, transform .2s;
+    animation: cardEnter .35s ease both;
 }
 
-.level-row:nth-child(2) { animation-delay: .04s; }
-.level-row:nth-child(3) { animation-delay: .08s; }
-.level-row:nth-child(4) { animation-delay: .12s; }
-.level-row:nth-child(5) { animation-delay: .16s; }
-.level-row:nth-child(6) { animation-delay: .20s; }
-.level-row:nth-child(7) { animation-delay: .24s; }
-.level-row:nth-child(8) { animation-delay: .28s; }
-.level-row:nth-child(9) { animation-delay: .32s; }
-.level-row:nth-child(10) { animation-delay: .36s; }
+.level-row:nth-child(2) { animation-delay: .03s; }
+.level-row:nth-child(3) { animation-delay: .06s; }
+.level-row:nth-child(4) { animation-delay: .09s; }
+.level-row:nth-child(5) { animation-delay: .12s; }
+.level-row:nth-child(6) { animation-delay: .15s; }
+.level-row:nth-child(7) { animation-delay: .18s; }
+.level-row:nth-child(8) { animation-delay: .21s; }
+.level-row:nth-child(9) { animation-delay: .24s; }
+.level-row:nth-child(10) { animation-delay: .27s; }
 
-@keyframes rowEnter {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .level-row:hover {
-    transform: translateY(-2px);
-    border-color: #548dc9;
-    box-shadow: 0 8px 26px rgba(0,0,0,.18),
-                0 0 17px rgba(65,157,255,.08);
+    border-color: #4688bd;
+    background: rgba(21,37,59,.98);
 }
 
-/* Rank number */
+.level-row.first-place {
+    border-color: rgba(94,203,255,.48);
+    background: linear-gradient(100deg, rgba(24,57,86,.72), rgba(17,28,45,.98) 65%);
+}
 
 .level-rank {
     color: #69baff;
-    font-size: 21px;
+    font-size: 17px;
     font-weight: 800;
     text-align: center;
 }
 
-/* Clickable thumbnails: NO PLAY OVERLAY */
-
 .level-thumb {
+    display: block;
     position: relative;
-    width: 126px;
+    width: 104px;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: 13px;
+    border-radius: 7px;
     background: #0b1322;
-    border: 1px solid #3a4d68;
-    display: block;
-    text-decoration: none;
+    border: 1px solid #344a66;
 }
 
 .level-thumb img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform .3s ease;
+    transition: transform .2s;
 }
 
 .level-thumb:hover img {
-    transform: scale(1.06);
+    transform: scale(1.04);
 }
 
-.level-thumb:focus-visible {
-    outline: 2px solid #65cfff;
-    outline-offset: 4px;
-}
-
-/* Hide any old overlay if one remains */
-
-.video-play,
-.level-thumb .video-play {
+/* Ensure no play overlay appears */
+.level-thumb .video-play,
+.level-video .video-play {
     display: none !important;
 }
-
-/* Text */
 
 .level-info {
     min-width: 0;
@@ -294,15 +246,14 @@ body {
 .level-title-line {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 7px;
     flex-wrap: wrap;
 }
 
-.level-name,
-.level-info h2 {
+.level-name {
     color: #f5f7ff;
-    font-size: 21px;
-    line-height: 1.25;
+    font-size: 17px;
+    line-height: 1.2;
     font-weight: 800;
     overflow-wrap: anywhere;
     margin: 0;
@@ -310,8 +261,9 @@ body {
 
 .level-creator {
     color: #a0aec3;
-    font-size: 14px;
-    margin-top: 7px;
+    font-size: 12px;
+    margin-top: 4px;
+    line-height: 1.35;
 }
 
 .level-creator .verifier {
@@ -320,12 +272,12 @@ body {
 
 .level-separator {
     color: #586981;
-    margin: 0 7px;
+    margin: 0 4px;
 }
 
 .level-points {
-    margin-top: 6px;
-    font-size: 14px;
+    margin-top: 4px;
+    font-size: 12px;
     color: #8998b0;
 }
 
@@ -333,161 +285,82 @@ body {
     color: #65b8ff;
 }
 
-/* Individual cyan neon skill boxes */
-
 .level-tags {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 7px;
-    margin-top: 10px;
+    gap: 5px;
+    margin-top: 6px;
 }
 
-.level-tags span,
-.level-tag {
+.level-tags .level-tag,
+.level-tags span {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 5px 9px;
-    border: 1px solid rgba(94,203,255,.75);
-    border-radius: 7px;
+    padding: 3px 7px;
+    border: 1px solid rgba(94,203,255,.5);
+    border-radius: 5px;
     color: #9bdbff;
-    background: rgba(15,43,68,.8);
-    box-shadow:
-        inset 0 0 8px rgba(94,203,255,.08),
-        0 0 7px rgba(94,203,255,.12);
-    font-size: 10px;
+    background: rgba(17,52,77,.45);
+    font-size: 9px;
     font-weight: 800;
-    letter-spacing: .45px;
-    line-height: 1.4;
-    text-transform: uppercase;
-    transition: border-color .2s ease, box-shadow .2s ease,
-                background .2s ease;
-}
-
-.level-tags span:hover,
-.level-tag:hover {
-    border-color: #65cfff;
-    background: rgba(25,75,112,.9);
-    box-shadow: 0 0 11px rgba(94,203,255,.25);
-}
-
-/* Score and Extreme Demon badge */
-
-.level-score {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-    color: #aabbd2;
-    font-size: 13px;
-    white-space: nowrap;
-}
-
-.level-score strong {
-    color: #65b8ff;
-    font-size: 20px;
-    font-weight: 800;
+    letter-spacing: .25px;
+    line-height: 1.3;
 }
 
 .extreme-badge {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 9px 11px;
-    margin-top: 7px;
-    border: 1px solid rgba(94,203,255,.3);
-    border-radius: 11px;
+    gap: 6px;
+    padding: 5px 7px;
+    border: 1px solid rgba(94,203,255,.24);
+    border-radius: 7px;
     color: #c9eaff;
     background: rgba(7,18,34,.55);
     white-space: nowrap;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
-    letter-spacing: .5px;
 }
 
 .demon-icon {
     display: grid;
     place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
     background: linear-gradient(145deg,#123c68,#087eb4);
     border: 1px solid #65cfff;
     color: white;
-    font-size: 17px;
-    box-shadow: 0 0 12px rgba(45,171,255,.25);
-    animation: demonGlow 2.5s ease-in-out infinite;
+    font-size: 13px;
 }
-
-@keyframes demonGlow {
-    0%,100% {
-        box-shadow: 0 0 7px rgba(94,203,255,.25);
-    }
-    50% {
-        box-shadow: 0 0 16px rgba(94,203,255,.65);
-    }
-}
-
-/* #1 special row */
-
-.level-row.first-place {
-    border-color: rgba(94,203,255,.6);
-    background:
-        radial-gradient(ellipse at 90% 50%, rgba(40,142,255,.15), transparent 50%),
-        rgba(29,41,60,.97);
-}
-
-.level-row.first-place .level-rank {
-    text-shadow: 0 0 13px rgba(94,203,255,.5);
-}
-
-.level-row.first-place::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: linear-gradient(110deg, transparent 35%,
-        rgba(94,203,255,.055) 50%, transparent 65%);
-    background-size: 220% 100%;
-    animation: rowShine 7s linear infinite;
-}
-
-@keyframes rowShine {
-    from { background-position: 150% 0; }
-    to { background-position: -150% 0; }
-}
-
-/* Filter panel */
 
 .filter-panel {
     display: none;
-    padding: 15px;
-    margin: -8px 0 20px;
-    border: 1px solid #34445d;
-    border-radius: 14px;
-    background: rgba(20,31,49,.95);
+    padding: 11px;
+    margin: -4px 0 14px;
+    border: 1px solid #293d57;
+    border-radius: 10px;
+    background: #101b2b;
 }
 
 .filter-panel.open {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 7px;
 }
 
 .filter-chip {
-    padding: 8px 12px;
-    border-radius: 9px;
-    border: 1px solid #3b506c;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #354b66;
     background: #17253a;
     color: #b9cbe1;
+    font-size: 12px;
     cursor: pointer;
-    transition: .2s ease;
 }
 
-.filter-chip:hover,
 .filter-chip.active {
     border-color: #5ecbff;
     color: #fff;
@@ -497,97 +370,84 @@ body {
 .no-results {
     display: none;
     text-align: center;
-    padding: 30px;
+    padding: 24px;
     color: #a0aec3;
-    border: 1px solid #344157;
-    border-radius: 16px;
-    background: rgba(29,41,60,.8);
+    border: 1px solid #293d57;
+    border-radius: 10px;
+    background: #111c2d;
 }
-
-/* Responsive */
 
 @media (max-width: 760px) {
     .levels-page {
-        padding: 22px 12px 55px;
+        padding: 18px 10px 40px;
     }
 
     .levels-header {
-        padding: 18px 5px 27px;
+        padding: 14px 4px 22px;
     }
 
     .pf-eyebrow {
         font-size: 10px;
-        letter-spacing: 3px;
+        letter-spacing: 2.5px;
     }
 
     .levels-header p {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .level-row {
-        grid-template-columns: 28px 94px minmax(0,1fr);
-        gap: 10px;
-        padding: 13px 10px;
-        min-height: 110px;
-        border-radius: 17px;
-    }
-
-    .level-rank {
-        font-size: 17px;
-    }
-
-    .level-thumb {
-        width: 94px;
+        grid-template-columns: 25px 82px minmax(0,1fr);
+        gap: 9px;
+        padding: 9px 8px;
         border-radius: 10px;
     }
 
-    .level-name,
-    .level-info h2 {
-        font-size: 16px;
+    .level-rank {
+        font-size: 14px;
+    }
+
+    .level-thumb {
+        width: 82px;
+        border-radius: 6px;
+    }
+
+    .level-name {
+        font-size: 14px;
     }
 
     .level-creator {
-        font-size: 12px;
-        line-height: 1.4;
-    }
-
-    .level-points {
-        font-size: 12px;
-    }
-
-    .level-tags {
-        gap: 5px;
-        margin-top: 8px;
-    }
-
-    .level-tags span,
-    .level-tag {
-        font-size: 9px;
-        padding: 4px 7px;
-    }
-
-    .level-score {
-        grid-column: 3;
-        align-items: flex-start;
-        white-space: normal;
+        font-size: 11px;
         margin-top: 3px;
     }
 
-    .level-score strong {
-        font-size: 16px;
+    .level-points {
+        font-size: 11px;
+        margin-top: 3px;
+    }
+
+    .level-tags {
+        gap: 4px;
+        margin-top: 5px;
+    }
+
+    .level-tags .level-tag,
+    .level-tags span {
+        font-size: 8px;
+        padding: 3px 5px;
     }
 
     .extreme-badge {
+        grid-column: 3;
         justify-self: start;
-        padding: 5px 7px;
-        margin-top: 2px;
-        font-size: 9px;
+        margin-top: 0;
+        padding: 4px 6px;
+        font-size: 8px;
     }
 
     .demon-icon {
-        width: 23px;
-        height: 23px;
-        font-size: 14px;
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
     }
 
     .level-tabs {
@@ -596,52 +456,50 @@ body {
 
     .level-tab {
         flex-shrink: 0;
-        padding: 10px 18px;
+        padding: 8px 14px;
     }
 
     .level-tools {
-        gap: 8px;
+        gap: 7px;
     }
 
     .filter-button {
-        padding: 0 13px;
+        padding: 0 10px;
     }
 }
 
 @media (max-width: 390px) {
     .level-row {
-        grid-template-columns: 24px 78px minmax(0,1fr);
-        gap: 8px;
-        padding: 11px 8px;
+        grid-template-columns: 22px 70px minmax(0,1fr);
+        gap: 7px;
+        padding: 8px 6px;
     }
 
     .level-thumb {
-        width: 78px;
+        width: 70px;
     }
 
-    .level-name,
-    .level-info h2 {
-        font-size: 14px;
+    .level-name {
+        font-size: 13px;
     }
 
     .level-creator {
-        font-size: 11px;
+        font-size: 10px;
     }
 
-    .level-score strong {
-        font-size: 14px;
+    .level-points {
+        font-size: 10px;
     }
 
     .extreme-badge {
-        gap: 5px;
+        gap: 4px;
         font-size: 8px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
+        animation: none !important;
         scroll-behavior: auto !important;
     }
 }
@@ -649,7 +507,6 @@ body {
 </head>
 
 <body>
-
 <header>
     <div class="logo">⚡ Pulse<span>Frame</span></div>
     <nav>
@@ -662,7 +519,6 @@ body {
 </header>
 
 <main class="levels-page">
-
     <section class="levels-header">
         <div class="pf-eyebrow">PULSEFRAME SKILL DATABASE</div>
         <h1>Explore <span>Levels</span></h1>
@@ -678,13 +534,9 @@ body {
     <div class="level-tools">
         <div class="search-wrap">
             <span class="search-icon">⌕</span>
-            <input type="search" class="level-search" id="level-search"
-                   placeholder="Search levels..." aria-label="Search levels">
+            <input type="search" class="level-search" id="level-search" placeholder="Search levels..." aria-label="Search levels">
         </div>
-        <button class="filter-button" id="filter-button"
-                aria-expanded="false" aria-controls="filter-panel">
-            ☷ Filters
-        </button>
+        <button class="filter-button" id="filter-button" aria-expanded="false">☷ Filters</button>
     </div>
 
     <div class="filter-panel" id="filter-panel">
@@ -699,197 +551,152 @@ body {
 
     <section class="level-list" id="level-list">
 
-        <!-- #1 GRIEF -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave high cps fast-paced">
-            <span class="level-rank">1</span>
+        <article class="level-row first-place" data-mode="classic">
+            <div class="level-rank">#1</div>
             <a class="level-thumb" href="https://youtu.be/gB8slBPlOjc" target="_blank" rel="noopener noreferrer" aria-label="Watch GRIEF on YouTube">
-                <img src="https://img.youtube.com/vi/gB8slBPlOjc/hqdefault.jpg" alt="GRIEF video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/gB8slBPlOjc/hqdefault.jpg" alt="GRIEF thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">GRIEF</h2>
-                <p class="level-creator">IceDCCave | Doggie</p>
-                <div class="level-tags"><span>Wave</span><span>High CPS</span><span>Fast-Paced</span></div>
+                <div class="level-creator">IceDCCave <span class="level-separator">|</span> <span class="verifier">Doggie</span></div>
+                <div class="level-points">250.00 — <strong>1000.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">High CPS</span><span class="level-tag">Fast-Paced</span></div>
             </div>
-            <div class="level-score">
-                <strong>250.00</strong>
-                <span>— 1000.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #2 Society -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave ship">
-            <span class="level-rank">2</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#2</div>
             <a class="level-thumb" href="https://youtu.be/3CoEaH1CM7o" target="_blank" rel="noopener noreferrer" aria-label="Watch Society on YouTube">
-                <img src="https://img.youtube.com/vi/3CoEaH1CM7o/hqdefault.jpg" alt="Society video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/3CoEaH1CM7o/hqdefault.jpg" alt="Society thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Society</h2>
-                <p class="level-creator">PulseFrame Database</p>
-                <div class="level-tags"><span>Wave</span><span>Ship</span></div>
+                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-points">240.00 — <strong>960.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
-            <div class="level-score">
-                <strong>240.00</strong>
-                <span>— 960.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #3 Thinking Space II -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave precision">
-            <span class="level-rank">3</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#3</div>
             <a class="level-thumb" href="https://youtu.be/CELNmHwln_c" target="_blank" rel="noopener noreferrer" aria-label="Watch Thinking Space II on YouTube">
-                <img src="https://img.youtube.com/vi/CELNmHwln_c/hqdefault.jpg" alt="Thinking Space II video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/CELNmHwln_c/hqdefault.jpg" alt="Thinking Space II thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Thinking Space II</h2>
-                <p class="level-creator">CairoX</p>
-                <div class="level-tags"><span>Wave</span><span>Precision</span></div>
+                <div class="level-creator">CairoX</div>
+                <div class="level-points">230.00 — <strong>920.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Precision</span></div>
             </div>
-            <div class="level-score">
-                <strong>230.00</strong>
-                <span>— 920.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #4 Amethyst -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave ship">
-            <span class="level-rank">4</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#4</div>
             <a class="level-thumb" href="https://youtu.be/4lfkzz1VCbA" target="_blank" rel="noopener noreferrer" aria-label="Watch Amethyst on YouTube">
-                <img src="https://img.youtube.com/vi/4lfkzz1VCbA/hqdefault.jpg" alt="Amethyst video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/4lfkzz1VCbA/hqdefault.jpg" alt="Amethyst thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Amethyst</h2>
-                <p class="level-creator">PulseFrame Database</p>
-                <div class="level-tags"><span>Wave</span><span>Ship</span></div>
+                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-points">220.00 — <strong>880.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
-            <div class="level-score">
-                <strong>220.00</strong>
-                <span>— 880.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #5 Flamewall -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave fast-paced">
-            <span class="level-rank">5</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#5</div>
             <a class="level-thumb" href="https://youtu.be/x4Io4zkWVRw" target="_blank" rel="noopener noreferrer" aria-label="Watch Flamewall on YouTube">
-                <img src="https://img.youtube.com/vi/x4Io4zkWVRw/hqdefault.jpg" alt="Flamewall video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/x4Io4zkWVRw/hqdefault.jpg" alt="Flamewall thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Flamewall</h2>
-                <p class="level-creator">Narwall</p>
-                <div class="level-tags"><span>Wave</span><span>Fast-Paced</span></div>
+                <div class="level-creator">Narwall</div>
+                <div class="level-points">210.00 — <strong>840.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Fast-Paced</span></div>
             </div>
-            <div class="level-score">
-                <strong>210.00</strong>
-                <span>— 840.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #6 Tidal Wave -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave ship endurance">
-            <span class="level-rank">6</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#6</div>
             <a class="level-thumb" href="https://youtu.be/9fsZ014qB3s" target="_blank" rel="noopener noreferrer" aria-label="Watch Tidal Wave on YouTube">
-                <img src="https://img.youtube.com/vi/9fsZ014qB3s/hqdefault.jpg" alt="Tidal Wave video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/9fsZ014qB3s/hqdefault.jpg" alt="Tidal Wave thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Tidal Wave</h2>
-                <p class="level-creator">OniLink</p>
-                <div class="level-tags"><span>Wave</span><span>Ship</span><span>Endurance</span></div>
+                <div class="level-creator">OniLink</div>
+                <div class="level-points">200.00 — <strong>800.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span><span class="level-tag">Endurance</span></div>
             </div>
-            <div class="level-score">
-                <strong>200.00</strong>
-                <span>— 800.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #7 Green Bullet -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave timing">
-            <span class="level-rank">7</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#7</div>
             <a class="level-thumb" href="https://youtu.be/JG-qcvVkZFw" target="_blank" rel="noopener noreferrer" aria-label="Watch Green Bullet on YouTube">
-                <img src="https://img.youtube.com/vi/JG-qcvVkZFw/hqdefault.jpg" alt="Green Bullet video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/JG-qcvVkZFw/hqdefault.jpg" alt="Green Bullet thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Green Bullet</h2>
-                <p class="level-creator">PulseFrame Database</p>
-                <div class="level-tags"><span>Wave</span><span>Timing</span></div>
+                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-points">190.00 — <strong>760.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Timing</span></div>
             </div>
-            <div class="level-score">
-                <strong>190.00</strong>
-                <span>— 760.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #8 ORBIT -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave ship">
-            <span class="level-rank">8</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#8</div>
             <a class="level-thumb" href="https://youtu.be/QKcv8DkNPd0" target="_blank" rel="noopener noreferrer" aria-label="Watch ORBIT on YouTube">
-                <img src="https://img.youtube.com/vi/QKcv8DkNPd0/hqdefault.jpg" alt="ORBIT video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/QKcv8DkNPd0/hqdefault.jpg" alt="ORBIT thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">ORBIT</h2>
-                <p class="level-creator">PulseFrame Database</p>
-                <div class="level-tags"><span>Wave</span><span>Ship</span></div>
+                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-points">180.00 — <strong>720.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
-            <div class="level-score">
-                <strong>180.00</strong>
-                <span>— 720.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #9 Antarctic Lights -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave ship">
-            <span class="level-rank">9</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#9</div>
             <a class="level-thumb" href="https://youtu.be/Uue4ZRhVf-I" target="_blank" rel="noopener noreferrer" aria-label="Watch Antarctic Lights on YouTube">
-                <img src="https://img.youtube.com/vi/Uue4ZRhVf-I/hqdefault.jpg" alt="Antarctic Lights video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/Uue4ZRhVf-I/hqdefault.jpg" alt="Antarctic Lights thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Antarctic Lights</h2>
-                <p class="level-creator">PulseFrame Database</p>
-                <div class="level-tags"><span>Wave</span><span>Ship</span></div>
+                <div class="level-creator">PulseFrame Database</div>
+                <div class="level-points">170.00 — <strong>680.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Ship</span></div>
             </div>
-            <div class="level-score">
-                <strong>170.00</strong>
-                <span>— 680.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
-        <!-- #10 Nullscapes -->
-        <article class="level-row" data-mode="classic" data-difficulty="extreme" data-tags="wave precision">
-            <span class="level-rank">10</span>
+        <article class="level-row" data-mode="classic">
+            <div class="level-rank">#10</div>
             <a class="level-thumb" href="https://youtu.be/EztneTPp5CU" target="_blank" rel="noopener noreferrer" aria-label="Watch Nullscapes on YouTube">
-                <img src="https://img.youtube.com/vi/EztneTPp5CU/hqdefault.jpg" alt="Nullscapes video thumbnail" loading="lazy">
+                <img src="https://img.youtube.com/vi/EztneTPp5CU/hqdefault.jpg" alt="Nullscapes thumbnail" loading="lazy">
             </a>
             <div class="level-info">
                 <h2 class="level-name">Nullscapes</h2>
-                <p class="level-creator">Kiba</p>
-                <div class="level-tags"><span>Wave</span><span>Precision</span></div>
+                <div class="level-creator">Kiba</div>
+                <div class="level-points">160.00 — <strong>640.00</strong> points</div>
+                <div class="level-tags"><span class="level-tag">Wave</span><span class="level-tag">Precision</span></div>
             </div>
-            <div class="level-score">
-                <strong>160.00</strong>
-                <span>— 640.00</span>
-                <span class="extreme-badge">EXTREME DEMON</span>
-            </div>
+            <div class="extreme-badge"><div class="demon-icon">☠</div>Extreme Demon</div>
         </article>
 
     </section>
 
-    <div class="no-results" id="no-results">
-        No levels match your search or filters.
-    </div>
-
+    <div class="no-results" id="no-results">No levels match your search or filters.</div>
 </main>
 
-<footer>
-    <p>© 2026 PulseFrame List</p>
-</footer>
+<footer><p>© 2026 PulseFrame List</p></footer>
 
 <script>
 const searchInput = document.getElementById("level-search");
@@ -908,27 +715,17 @@ function updateRows() {
     const query = searchInput.value.trim().toLowerCase();
 
     rows.forEach(row => {
-        const text = (
-            row.innerText + " " + (row.dataset.tags || "")
-        ).toLowerCase();
-
+        const text = row.innerText.toLowerCase();
         const matchesSearch = text.includes(query);
         const matchesMode = row.dataset.mode === activeMode;
         const matchesFilters = [...activeFilters].every(filter =>
-            (row.dataset.tags || "")
-                .toLowerCase()
-                .split(/\s+/)
-                .includes(filter.toLowerCase().replace(/\s+/g, "-")) ||
             text.includes(filter.toLowerCase())
         );
 
         const visible = matchesSearch && matchesMode && matchesFilters;
-
         row.style.display = visible ? "" : "none";
 
-        if (visible) {
-            visibleCount++;
-        }
+        if (visible) visibleCount++;
     });
 
     noResults.style.display = visibleCount ? "none" : "block";
@@ -947,7 +744,6 @@ tabs.forEach(tab => {
 
 filterButton.addEventListener("click", () => {
     const isOpen = filterPanel.classList.toggle("open");
-
     filterButton.classList.toggle("active", isOpen);
     filterButton.setAttribute("aria-expanded", String(isOpen));
 });
@@ -968,8 +764,6 @@ chips.forEach(chip => {
     });
 });
 
-/* Fallback styling if a thumbnail fails to load */
-
 document.querySelectorAll(".level-thumb img").forEach(img => {
     img.addEventListener("error", () => {
         img.style.opacity = "0";
@@ -978,10 +772,7 @@ document.querySelectorAll(".level-thumb img").forEach(img => {
     });
 });
 
-/* Initial render */
-
 updateRows();
 </script>
-
 </body>
 </html>
