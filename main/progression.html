@@ -32,6 +32,22 @@ h1{font-size:clamp(30px,5vw,44px);margin:10px 0}h1 span{color:#62d7ff}
 <section class="demon-roadmap" id="demonRoadmap"><div class="roadmap-intro"><div class="eyebrow">Curated level path</div><h2>Extreme Demon <span>Roadmap</span></h2><p>Progress from accessible Extreme Demons toward tougher challenges. PulseFrame tier order is a guide, not an official difficulty ranking.</p><div class="roadmap-stats"><span class="roadmap-pill" id="roadmapCompleted">0 levels beaten</span><span class="roadmap-pill" id="roadmapTotal">0 levels listed</span><span class="roadmap-pill" id="roadmapNext">Next: Entry</span></div></div><div class="roadmap-filter"><input type="search" id="levelSearch" placeholder="Search Extreme Demons…" aria-label="Search Extreme Demon levels"><select id="levelFilter" aria-label="Filter levels"><option value="all">All levels</option><option value="todo">Not beaten</option><option value="done">Beaten</option></select></div><div id="roadmapTiers"></div></section></main>
 <style>
 .player-dashboard,.demon-roadmap{margin:18px 0;padding:20px;border:1px solid #263650;border-radius:15px;background:#0d1421}.player-dashboard h2,.roadmap-intro h2{font-size:20px;margin-bottom:12px}.profile-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.profile-field{display:flex;flex-direction:column;gap:6px;font-size:12px;color:#91a1ba}.profile-field input,.roadmap-filter input,.roadmap-filter select{width:100%;min-width:0;box-sizing:border-box;background:#101a2a;color:#edf5ff;border:1px solid #2b405e;border-radius:9px;padding:11px;font:inherit}.demon-count{max-width:240px;margin-top:12px;padding:10px;border:1px solid #263953;border-radius:10px;background:#101a2a}.demon-count label{display:block;font-size:11px;color:#91a1ba;margin-bottom:7px}.demon-count input{box-sizing:border-box;width:100%;background:#0b1220;color:#fff;border:1px solid #2b405e;border-radius:7px;padding:8px}.dashboard-note,.roadmap-intro p{font-size:13px;color:#8e9eb5;line-height:1.6;margin:10px 0 0}.roadmap-intro{padding:4px 0 12px}.roadmap-intro h2{font-size:24px;margin:7px 0}.roadmap-stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.roadmap-pill{font-size:12px;color:#d7e8ff;background:#101a2a;border:1px solid #2b405e;border-radius:99px;padding:7px 10px}.roadmap-filter{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.roadmap-filter>*{flex:1}.roadmap-tier{border:1px solid #263650;border-radius:13px;background:#0c111c;overflow:hidden;margin:12px 0}.roadmap-tier-head{display:flex;align-items:center;gap:12px;padding:14px;background:#111d2e}.tier-emblem{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:#18324f;color:#72caff;font-size:19px;flex-shrink:0}.roadmap-tier-title{flex:1;min-width:0}.roadmap-tier-title h3{font-size:16px;margin:0 0 4px}.roadmap-tier-title p{font-size:12px;color:#8fa2bd;margin:0}.tier-progress{text-align:right;font-size:11px;color:#a9bbd3;white-space:nowrap}.tier-progress strong{display:block;font-size:17px;color:#62d7ff}.level-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:10px}.level-card{display:flex;gap:10px;align-items:center;min-width:0;padding:11px;border:1px solid #24344c;border-radius:10px;background:#101a2a}.level-check{width:19px;height:19px;accent-color:#45b9ff;flex-shrink:0}.level-copy{min-width:0;flex:1}.level-copy strong{display:block;font-size:14px;overflow-wrap:anywhere}.level-copy small{display:block;color:#91a1ba;font-size:11px;margin-top:4px}.level-links{margin-top:6px}.level-links a{color:#77cbff;font-size:11px;text-decoration:none}.roadmap-complete{color:#7ce5b1!important}@media(max-width:600px){.profile-fields,.level-cards{grid-template-columns:1fr}.player-dashboard,.demon-roadmap{padding:15px}.roadmap-filter{flex-direction:column}.roadmap-tier-head{padding:12px}}
+
+/* Subtle cyan text glow — kept soft for readability */
+.progress-hero h1,
+.progress-hero h1 span,
+.progress-hero .stat strong,
+.player-dashboard h2,
+.roadmap-intro h2,
+.roadmap-tier-title h3,
+.level-copy strong,
+.tier-progress strong {
+  text-shadow: 0 0 7px rgba(98, 215, 255, 0.16);
+}
+.eyebrow,
+.level-links a {
+  text-shadow: 0 0 5px rgba(98, 215, 255, 0.12);
+}
 </style>
 <script>
 const storeKey="pulseframe-progression-v2",tiers=[
