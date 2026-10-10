@@ -54,7 +54,8 @@ const storeKey="pulseframe-progression-v2",tiers=[
 {id:"entry",name:"Entry Extremes",note:"Build confidence with accessible extremes",icon:"✦",levels:[["Acu","Entry"],["Cataclysm","Entry"],["Red World","Entry"],["Hypersonic","Entry"]]},
 {id:"developing",name:"Developing",note:"Improve consistency and control",icon:"◆",levels:[["Allegiance","Developing"],["Aftermath","Developing"],["Bloodbath","Developing"],["Artificial Ascent","Developing"]]},
 {id:"advanced",name:"Advanced",note:"Demanding skillsets and longer consistency",icon:"⬟",levels:[["Black Blizzard","Advanced"],["Sonic Wave","Advanced"],["Crimson Planet","Advanced"],["Zodiac","Advanced"]]},
-{id:"elite",name:"Elite Extremes",note:"High-end challenges",icon:"★",levels:[["The Golden","Elite"],["Sakupen Circles","Elite"],["Slaughterhouse","Elite"],["Acheron","Elite"],["Tidal Wave","Elite"]]}];
+{id:"elite",name:"Elite Extremes",note:"High-end challenges",icon:"★",levels:[["The Golden","Elite"],["Sakupen Circles","Elite"],["Slaughterhouse","Elite"],["Acheron","Elite"],["Tidal Wave","Elite"]]},
+{id:"unrated",name:"Unrated Challenges",note:"Verified or extreme-difficulty levels that are not officially rated in-game",icon:"◇",levels:[["Aquamarine","Unrated"],["Silent Poltergeist","Unrated"],["Lesopowal","Unrated"],["Unnerfed Sakupen Circles","Unrated"]]}];
 let state={checks:{},hardest:"",goal:"",extremeCount:0};try{const s=JSON.parse(localStorage.getItem(storeKey)||"{}");state={...state,...s,checks:s.checks||{}}}catch(e){}
 const $=id=>document.getElementById(id);$("hardestLevel").value=state.hardest||"";$("currentGoal").value=state.goal||"";$("extremeCount").value=Number(state.extremeCount)||0;
 function save(){try{localStorage.setItem(storeKey,JSON.stringify(state))}catch(e){}}
