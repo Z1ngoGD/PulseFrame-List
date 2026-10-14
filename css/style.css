@@ -1451,3 +1451,64 @@ nav a.active {
 img, video, canvas { max-width: 100%; image-rendering: auto; backface-visibility: hidden; }
 .site-header .profile-nav-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #2c4667;border-radius:50%;color:#7ddcff;background:linear-gradient(145deg,#14243a,#0b1220);transition:border-color .2s ease,color .2s ease,transform .2s ease}
 .site-header .profile-nav-icon:hover{color:#fff;border-color:#65cfff;transform:translateY(-1px)}
+
+
+/* =========================
+   PULSEFRAME MOVING BLUE LIGHTNING
+   Subtle animated bolts behind every page
+========================= */
+body {
+    position: relative;
+    isolation: isolate;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -1;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    will-change: transform, opacity;
+}
+
+body::before {
+    opacity: 0.42;
+    background:
+        linear-gradient(128deg, transparent 0 47%, #168bff00 47.2%, #168bff 47.45%, #9beaff 47.62%, #168bff 47.8%, transparent 48.1%) 12% 0% / 42% 90% no-repeat,
+        linear-gradient(53deg, transparent 0 48%, #087cff00 48.2%, #087cff 48.45%, #b3f4ff 48.62%, #087cff 48.8%, transparent 49.1%) 86% 12% / 36% 100% no-repeat,
+        linear-gradient(132deg, transparent 0 48%, #087cff00 48.2%, #087cff 48.45%, #b3f4ff 48.62%, #087cff 48.8%, transparent 49.1%) 52% 100% / 34% 80% no-repeat;
+    filter: drop-shadow(0 0 7px #078bff) drop-shadow(0 0 18px #087cff);
+    animation: pf-lightning-drift 13s ease-in-out infinite alternate, pf-lightning-flash 7s steps(1, end) infinite;
+}
+
+body::after {
+    opacity: 0.2;
+    background:
+        linear-gradient(124deg, transparent 0 48%, #188dff00 48.2%, #188dff 48.45%, #c2f5ff 48.62%, #188dff 48.8%, transparent 49.1%) 78% 0% / 30% 70% no-repeat,
+        linear-gradient(58deg, transparent 0 48%, #188dff00 48.2%, #188dff 48.45%, #c2f5ff 48.62%, #188dff 48.8%, transparent 49.1%) 20% 100% / 38% 85% no-repeat;
+    filter: drop-shadow(0 0 8px #078bff) drop-shadow(0 0 22px #087cff);
+    animation: pf-lightning-drift 18s ease-in-out infinite alternate-reverse, pf-lightning-flash 11s steps(1, end) infinite reverse;
+}
+
+@keyframes pf-lightning-drift {
+    0% { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+    50% { transform: translate3d(1%, 1.5%, 0) scale(1.025); }
+    100% { transform: translate3d(2%, -1%, 0) scale(1.01); }
+}
+
+@keyframes pf-lightning-flash {
+    0%, 8%, 10%, 34%, 36%, 100% { opacity: 0.14; }
+    9%, 35% { opacity: 0.48; }
+    62% { opacity: 0.25; }
+    63% { opacity: 0.58; }
+    64% { opacity: 0.18; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after {
+        animation: none;
+    }
+}
