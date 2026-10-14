@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Machine - PulseFrame</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body{background:radial-gradient(ellipse at 50% 0%,rgba(24,104,180,.22),transparent 55%),#080d18}
+.tm-wrap{max-width:1000px;margin:0 auto;padding:38px 20px 70px}
+.tm-hero{text-align:center;padding:24px 10px 34px}
+.tm-kicker{color:#67d7ff;font-size:11px;font-weight:800;letter-spacing:3px}
+.tm-hero h1{font-size:clamp(32px,5vw,54px);margin:12px 0;color:#f4f7ff}
+.tm-hero h1 span{color:#65cfff}
+.tm-hero p{max-width:650px;margin:0 auto;color:#a5b6cd;line-height:1.7}
+.tm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.tm-card{background:linear-gradient(145deg,#121e31,#0a101c);border:1px solid #273c58;border-radius:18px;padding:24px;box-shadow:0 16px 45px #0003}
+.tm-card h2{font-size:22px;margin-bottom:9px}
+.tm-card p{color:#a5b6cd;line-height:1.6;margin-bottom:17px}
+.tm-card label{display:block;color:#d9e8fa;font-size:13px;margin-bottom:7px}
+.tm-card select{width:100%;background:#080f1b;color:#f1f5ff;border:1px solid #344c6b;border-radius:9px;padding:12px;margin-bottom:14px;font:inherit}
+.tm-button{display:inline-flex;justify-content:center;align-items:center;width:100%;padding:12px 16px;border-radius:10px;border:1px solid #4b9ed1;background:linear-gradient(135deg,#1463a4,#153a67);color:#fff;text-decoration:none;font-weight:800;cursor:pointer}
+.tm-button:hover{filter:brightness(1.15)}
+.tm-note{margin-top:18px;padding:15px 17px;border-radius:12px;background:#101a29;border:1px solid #263951;color:#a9bad0;line-height:1.6;font-size:13px}
+.tm-future{border-color:#23594f;background:linear-gradient(145deg,#10251f,#0a111b)}
+.tm-future .tm-button{background:linear-gradient(135deg,#13795b,#14513f);border-color:#39bd91}
+@media(max-width:680px){.tm-grid{grid-template-columns:1fr}.tm-wrap{padding-top:20px}.tm-card{padding:20px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+<a href="index.html" class="brand"><div class="brand-icon">⚡</div><div class="logo">Pulse<span>Frame</span></div></a>
+<nav>
+<a href="index.html">Home</a><a href="main/rankings.html">Rankings</a><a href="main/progression.html">Progression</a><a href="main/levels.html">Levels</a><a href="time-machine.html" aria-current="page">Time Machine</a><a href="main/profile.html" class="profile-nav-icon" aria-label="Profile" title="Profile"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"></circle><path d="M4.5 20c.7-4 3.2-6 7.5-6s6.8 2 7.5 6"></path></svg></a>
+</nav><button class="menu-button" aria-label="Open menu">☰</button>
+</header>
+<main class="tm-wrap">
+<section class="tm-hero"><div class="tm-kicker">PULSEFRAME ARCHIVE SYSTEM</div><h1>Time <span>Machine</span></h1><p>Jump back to older Demon List snapshots, or open a clearly marked future preview. Past snapshots come from the Internet Archive; future rankings are speculative, not official predictions.</p></section>
+<section class="tm-grid">
+<article class="tm-card">
+<h2>⏪ Past Demon List</h2>
+<p>Choose a year to open an archived Pointercrate Demon List snapshot from around that year.</p>
+<label for="past-year">Archive year</label>
+<select id="past-year">
+<option value="2017">2017 — Early Demon List era</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026" selected>2026 — Recent archive</option>
+</select>
+<a class="tm-button" id="past-open" href="https://web.archive.org/web/20260101000000/https://pointercrate.com/demonlist/" target="_blank" rel="noopener noreferrer">Open archived list ↗</a>
+<div class="tm-note">Archive availability varies by year. The Internet Archive may show the nearest saved capture rather than a snapshot from January 1.</div>
+</article>
+<article class="tm-card tm-future">
+<h2>⏩ Future Preview</h2>
+<p>Explore a future-year preview of PulseFrame. This is a time-capsule view, not a claim about what the official list will look like.</p>
+<label for="future-year">Preview year</label>
+<select id="future-year"><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option><option value="2035">2035</option><option value="2040">2040</option></select>
+<a class="tm-button" id="future-open" href="levels.html?era=future&year=2027">Open future preview ↗</a>
+<div class="tm-note">Future mode keeps the current level data and labels it as a preview. It does not invent future placements or verifier changes.</div>
+</article>
+</section>
+</main>
+<footer><p>© 2026 PulseFrame List</p></footer>
+<script>
+const pastYear=document.getElementById("past-year");
+const pastOpen=document.getElementById("past-open");
+function updatePast(){const year=pastYear.value;pastOpen.href="https://web.archive.org/web/"+year+"0101000000/https://pointercrate.com/demonlist/";pastOpen.textContent="Open "+year+" archive ↗";}
+pastYear.addEventListener("change",updatePast);
+const futureYear=document.getElementById("future-year");
+const futureOpen=document.getElementById("future-open");
+function updateFuture(){futureOpen.href="main/levels.html?era=future&year="+futureYear.value;futureOpen.textContent="Open "+futureYear.value+" preview ↗";}
+futureYear.addEventListener("change",updateFuture);
+</script>
+</body>
+</html>
