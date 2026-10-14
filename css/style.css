@@ -1445,3 +1445,9 @@ nav a.active {
     }
 }
 
+
+
+/* Global image clarity and compact profile icon */
+img, video, canvas { max-width: 100%; image-rendering: auto; backface-visibility: hidden; }
+.site-header .profile-nav-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #2c4667;border-radius:50%;color:#7ddcff;background:linear-gradient(145deg,#14243a,#0b1220);transition:border-color .2s ease,color .2s ease,transform .2s ease}
+.site-header .profile-nav-icon:hover{color:#fff;border-color:#65cfff;transform:translateY(-1px)}
