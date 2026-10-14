@@ -1679,3 +1679,23 @@ footer {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* PF lightning brand mark */
+.brand-mark {
+    width: 43px;
+    height: 43px;
+    display: block;
+    flex: 0 0 43px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px #168cff70);
+}
+header .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+@media (max-width: 600px) {
+    .brand-mark { width: 36px; height: 36px; flex-basis: 36px; }
+}
