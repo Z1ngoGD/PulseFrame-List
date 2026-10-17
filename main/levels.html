@@ -649,10 +649,12 @@ body {
         <div class="pulse-line"></div>
     </section>
 
-    <div class="level-tabs">
-        <button class="level-tab active" data-mode="classic">Classic</button>
-        <button class="level-tab" data-mode="platformer">Platformer</button>
+    <div class="level-tabs pf-list-tabs" aria-label="Choose level list">
+        <button class="level-tab active" data-tier="100">Main List <span>Top 100</span></button>
+        <button class="level-tab" data-tier="150">Extended <span>Top 150</span></button>
+        <button class="level-tab" data-tier="200">Legacy <span>Top 200</span></button>
     </div>
+    <p class="list-tier-note" id="list-tier-note">Main List includes ranks #1–#100.</p>
 
     <div class="level-tools">
         <div class="search-wrap">
@@ -1924,8 +1926,9 @@ const filterButton = document.getElementById("filter-button");
 const filterPanel = document.getElementById("filter-panel");
 const chips = [...document.querySelectorAll(".filter-chip")];
 const noResults = document.getElementById("no-results");
+const tierNote = document.getElementById("list-tier-note");
 
-let activeMode = "classic";
+let activeTier = 100;
 const activeFilters = new Set();
 
 function updateRows() {
@@ -1934,19 +1937,29 @@ function updateRows() {
 
     rows.forEach(row => {
         const text = row.innerText.toLowerCase();
+        const rankMatch = (row.querySelector(".level-rank")?.textContent.match(/\d+/) || [])[0];
+        const rank = rankMatch ? Number(rankMatch) : 9999;
         const matchesSearch = text.includes(query);
-        const matchesMode = row.dataset.mode === activeMode;
+        const matchesTier = rank <= activeTier;
         const matchesFilters = [...activeFilters].every(filter =>
             text.includes(filter.toLowerCase())
         );
 
-        const visible = matchesSearch && matchesMode && matchesFilters;
+        const visible = matchesSearch && matchesTier && matchesFilters;
         row.style.display = visible ? "" : "none";
-
+        row.classList.toggle("pf-row-enter", visible);
         if (visible) visibleCount++;
     });
 
     noResults.style.display = visibleCount ? "none" : "block";
+    if (tierNote) {
+        const available = rows.filter(row => {
+            const n = Number((row.querySelector(".level-rank")?.textContent.match(/\d+/) || [])[0] || 9999);
+            return n <= activeTier;
+        }).length;
+        const label = activeTier === 100 ? "Main List" : activeTier === 150 ? "Extended" : "Legacy";
+        tierNote.textContent = label + " shows ranks #1–#" + activeTier + ". " + available + " ranked entries currently available in this range.";
+    }
 }
 
 searchInput.addEventListener("input", updateRows);
@@ -1955,7 +1968,10 @@ tabs.forEach(tab => {
     tab.addEventListener("click", () => {
         tabs.forEach(item => item.classList.remove("active"));
         tab.classList.add("active");
-        activeMode = tab.dataset.mode;
+        activeTier = Number(tab.dataset.tier) || 100;
+        tab.classList.remove("pf-tab-tapped");
+        void tab.offsetWidth;
+        tab.classList.add("pf-tab-tapped");
         updateRows();
     });
 });
