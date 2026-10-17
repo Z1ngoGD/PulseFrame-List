@@ -1759,3 +1759,96 @@ header .brand {
 @media (prefers-reduced-motion: reduce) {
     .pf-discord-button { transition: none; }
 }
+
+
+/* SOFTER PULSEFRAME TYPOGRAPHY, TAPS & LIST TABS */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+h1, h2, h3, .logo, .level-name, .level-points, .level-rank, button, .button, .level-tab {
+    letter-spacing: -0.015em;
+}
+p, .level-creator, .level-tags, .list-tier-note {
+    color: #b9c9df;
+    line-height: 1.65;
+}
+button, .button, .level-tab, .filter-chip, a {
+    -webkit-tap-highlight-color: transparent;
+}
+button, .button, .level-tab, .filter-chip, .pf-discord-button {
+    transition: color .22s ease, background-color .22s ease, border-color .22s ease,
+                box-shadow .22s ease, transform .22s cubic-bezier(.2,.75,.25,1);
+}
+button:active, .button:active, .level-tab:active, .filter-chip:active, a.button:active {
+    transform: scale(.965);
+}
+.level-tabs.pf-list-tabs {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 8px;
+}
+.pf-list-tabs .level-tab {
+    flex: 1 1 140px;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border-radius: 14px;
+    padding: 11px 16px;
+    color: #b9c9df;
+    background: rgba(14, 28, 49, .72);
+    border: 1px solid rgba(102, 151, 205, .22);
+    box-shadow: inset 0 1px rgba(255,255,255,.035);
+    font-weight: 750;
+}
+.pf-list-tabs .level-tab span {
+    font-size: .78em;
+    font-weight: 650;
+    color: #91a8c5;
+    letter-spacing: .02em;
+}
+.pf-list-tabs .level-tab.active {
+    color: #f2f8ff;
+    background: linear-gradient(135deg, rgba(31, 112, 221, .3), rgba(13, 51, 105, .45));
+    border-color: rgba(89, 174, 255, .72);
+    box-shadow: 0 0 22px rgba(35, 126, 255, .15), inset 0 1px rgba(255,255,255,.08);
+}
+.pf-list-tabs .level-tab.active span { color: #bceaff; }
+.pf-list-tabs .level-tab:hover { transform: translateY(-2px); border-color: rgba(89,174,255,.58); }
+.pf-tab-tapped { animation: pf-tab-pop .28s ease-out; }
+@keyframes pf-tab-pop {
+    0% { transform: scale(.96); }
+    65% { transform: scale(1.025); }
+    100% { transform: scale(1); }
+}
+.list-tier-note {
+    margin: 6px 0 18px;
+    font-size: .9rem;
+    opacity: .9;
+}
+.level-row {
+    transition: transform .24s cubic-bezier(.2,.75,.25,1), border-color .24s ease,
+                box-shadow .24s ease, background-color .24s ease;
+}
+.level-row.pf-row-enter { animation: pf-row-soft-in .24s ease both; }
+@keyframes pf-row-soft-in {
+    from { opacity: .65; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.level-thumb img {
+    transition: transform .35s cubic-bezier(.2,.75,.25,1), filter .35s ease;
+}
+.level-thumb:hover img { transform: scale(1.045); filter: saturate(1.08) brightness(1.04); }
+@media (max-width: 600px) {
+    .level-tabs.pf-list-tabs { gap: 7px; }
+    .pf-list-tabs .level-tab { flex-basis: 100%; min-height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pf-tab-tapped, .level-row.pf-row-enter { animation: none !important; }
+    .level-row, .level-thumb img, button, .button, .level-tab, .filter-chip, .pf-discord-button { transition: none !important; }
+}
