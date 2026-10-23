@@ -626,6 +626,48 @@ body {
 }
 .future-preview-banner{margin:0 auto 20px;max-width:1000px;padding:14px 18px;border:1px solid #2b876c;background:#10251f;color:#c9ffea;border-radius:12px;text-align:center;font-weight:700}.future-preview-banner[hidden]{display:none}
 </style>
+
+<style>
+.pf-wheel-panel{margin:34px 0 28px;padding:24px;border:1px solid rgba(86,157,220,.3);border-radius:20px;background:linear-gradient(145deg,rgba(17,31,52,.96),rgba(8,15,27,.98));box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.pf-wheel-heading h2{margin:0;color:#f0f7ff;font-size:clamp(25px,4vw,34px);letter-spacing:-.8px}
+.pf-wheel-heading h2 span{color:#69d9ff}
+.pf-wheel-heading p{margin:7px 0 20px;color:#9db0ca;font-size:14px;line-height:1.6}
+.pf-wheel-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(270px,.9fr);gap:26px;align-items:start}
+.pf-wheel-stage{position:relative;display:flex;flex-direction:column;align-items:center;min-width:0}
+#pf-wheel-canvas{display:block;max-width:100%;filter:drop-shadow(0 10px 25px rgba(0,0,0,.24))}
+.pf-wheel-pointer{position:absolute;top:-2px;left:50%;transform:translateX(-50%);z-index:2;width:0;height:0;border-left:17px solid transparent;border-right:17px solid transparent;border-top:35px solid #f3fbff;filter:drop-shadow(0 2px 4px #000)}
+.pf-wheel-empty{position:absolute;inset:0;place-items:center;pointer-events:none;color:#a8c1de;font-size:14px;font-weight:700}
+.pf-spin-button{margin-top:15px;border:1px solid #8ce5ff;border-radius:999px;padding:13px 25px;background:linear-gradient(110deg,#1878f2,#19bde8);color:#fff;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 7px 22px rgba(25,189,232,.2);transition:transform .2s,filter .2s}
+.pf-spin-button:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.1)}
+.pf-spin-button:active:not(:disabled){transform:scale(.97)}
+.pf-spin-button:disabled{opacity:.45;cursor:not-allowed}
+.pf-wheel-result{min-height:24px;text-align:center;color:#c8edff;font-weight:700;line-height:1.5}
+.pf-wheel-controls{min-width:0}
+.pf-wheel-controls>label{display:block;margin:0 0 7px;color:#dceaff;font-weight:800;font-size:13px}
+#pf-wheel-search{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:10px;border:1px solid #304967;background:#0b1525;color:#fff;font:inherit;outline:none}
+#pf-wheel-search:focus{border-color:#61cfff;box-shadow:0 0 0 3px rgba(97,207,255,.1)}
+.pf-wheel-level-picker{margin-top:10px;max-height:225px;overflow:auto;border:1px solid #293e59;border-radius:10px;background:#0b1422}
+.pf-wheel-option{display:flex;gap:9px;align-items:center;padding:8px 10px;color:#c5d5ea;font-size:13px;cursor:pointer;border-bottom:1px solid rgba(65,91,121,.22)}
+.pf-wheel-option:last-child{border-bottom:0}
+.pf-wheel-option:hover{background:rgba(60,124,183,.13)}
+.pf-wheel-option input{accent-color:#42caff;flex-shrink:0}
+.pf-wheel-picker-empty{padding:10px;color:#9db0ca;font-size:13px}
+.pf-wheel-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+.pf-wheel-secondary,.pf-wheel-clear{border:1px solid #365371;border-radius:9px;padding:9px 12px;background:#14253b;color:#d7eaff;font-weight:750;font-size:12px;cursor:pointer;transition:background .2s,transform .2s}
+.pf-wheel-secondary:hover,.pf-wheel-clear:hover{background:#1d3b5c;transform:translateY(-1px)}
+.pf-wheel-list-heading{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#eff7ff;font-size:13px}
+.pf-wheel-list-heading span{color:#91b3d3;font-weight:600}
+.pf-wheel-chosen{list-style:none;padding:0;margin:8px 0;max-height:180px;overflow:auto}
+.pf-wheel-chosen li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 9px;border-radius:7px;color:#c5d5ea;font-size:12px;background:rgba(28,48,73,.55);margin-bottom:5px}
+.pf-wheel-chosen li span{min-width:0;overflow-wrap:anywhere}
+.pf-wheel-chosen li button{flex-shrink:0;border:0;border-radius:6px;background:transparent;color:#9bc9e9;font-size:20px;cursor:pointer}
+.pf-wheel-chosen li button:hover{color:#fff;background:rgba(255,255,255,.08)}
+.pf-wheel-clear{border-color:rgba(255,113,139,.32);color:#ffb5c3;background:rgba(106,31,53,.18)}
+.pf-wheel-save-note{font-size:11px;color:#8198b5;margin:10px 0 0}
+@media(max-width:760px){.pf-wheel-panel{padding:17px 13px}.pf-wheel-layout{grid-template-columns:1fr;gap:18px}.pf-wheel-stage{max-width:460px;width:100%;margin:auto}.pf-wheel-controls{width:100%}.pf-wheel-pointer{top:-5px}}
+@media(prefers-reduced-motion:reduce){.pf-spin-button,.pf-wheel-secondary,.pf-wheel-clear{transition:none}}
+</style>
+
 </head>
 
 <body>
@@ -2480,6 +2522,34 @@ body {
         </article>
     </section>
 
+    <section class="pf-wheel-panel" id="randomizer-wheel">
+        <div class="pf-wheel-heading">
+            <div><div class="pf-eyebrow">PULSEFRAME RANDOMIZER</div><h2>Level <span>Wheel</span></h2><p>Choose levels from the list, add them to your wheel, then spin for a random pick.</p></div>
+        </div>
+        <div class="pf-wheel-layout">
+            <div class="pf-wheel-stage">
+                <div class="pf-wheel-pointer" aria-hidden="true"></div>
+                <canvas id="pf-wheel-canvas" width="520" height="520" aria-label="Random level wheel"></canvas>
+                <div class="pf-wheel-empty" id="pf-wheel-empty">Add levels to build your wheel</div>
+                <button class="pf-spin-button" id="pf-spin-button" type="button" disabled>SPIN THE WHEEL</button>
+                <p class="pf-wheel-result" id="pf-wheel-result" aria-live="polite">Your result will appear here.</p>
+            </div>
+            <div class="pf-wheel-controls">
+                <label for="pf-wheel-search">Find levels to add</label>
+                <input id="pf-wheel-search" type="search" placeholder="Search the level list…">
+                <div class="pf-wheel-level-picker" id="pf-wheel-level-picker" aria-label="Select levels"></div>
+                <div class="pf-wheel-actions">
+                    <button class="pf-wheel-secondary" id="pf-add-selected" type="button">Add selected</button>
+                    <button class="pf-wheel-secondary" id="pf-add-visible" type="button">Add search results</button>
+                </div>
+                <div class="pf-wheel-list-heading"><strong>On your wheel</strong><span id="pf-wheel-count">0 levels</span></div>
+                <ul class="pf-wheel-chosen" id="pf-wheel-chosen"></ul>
+                <button class="pf-wheel-clear" id="pf-wheel-clear" type="button">Clear wheel</button>
+                <p class="pf-wheel-save-note">Your wheel is saved on this device.</p>
+            </div>
+        </div>
+    </section>
+
     <div class="no-results" id="no-results">No levels match your search or filters.</div>
 
 <div class="level-details-backdrop" id="level-details-backdrop" role="dialog" aria-modal="true" aria-labelledby="level-details-title">
@@ -2703,6 +2773,175 @@ document.addEventListener("keydown", event => {
     if (event.key === "Escape" && detailsBackdrop.classList.contains("open")) closeLevelDetails();
 });
 
+
+const wheelCanvas = document.getElementById("pf-wheel-canvas");
+const wheelCtx = wheelCanvas.getContext("2d");
+const wheelSearch = document.getElementById("pf-wheel-search");
+const wheelPicker = document.getElementById("pf-wheel-level-picker");
+const wheelChosen = document.getElementById("pf-wheel-chosen");
+const wheelCount = document.getElementById("pf-wheel-count");
+const wheelResult = document.getElementById("pf-wheel-result");
+const spinButton = document.getElementById("pf-spin-button");
+const wheelEmpty = document.getElementById("pf-wheel-empty");
+const wheelKey = "pulseframe-wheel-levels-v1";
+const wheelColors = ["#1878f2","#19bde8","#6c58ef","#e04e9b","#f39b36","#18a987","#4768c9","#c45be5"];
+let wheelItems = [];
+let wheelAngle = -Math.PI / 2;
+let wheelSpinning = false;
+
+function wheelLevelData(row) {
+    return {
+        name: row.querySelector(".level-name")?.textContent.trim() || "Unknown level",
+        rank: row.querySelector(".level-rank")?.textContent.trim() || "",
+        creator: row.querySelector(".level-creator")?.textContent.trim() || "Unknown creator"
+    };
+}
+function loadWheel() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(wheelKey) || "[]");
+        const validNames = new Set(rows.map(row => wheelLevelData(row).name));
+        wheelItems = Array.isArray(saved) ? saved.filter(item => item && validNames.has(item.name)).slice(0, 200) : [];
+    } catch { wheelItems = []; }
+    renderWheelPicker();
+    renderWheelChosen();
+    drawWheel();
+}
+function saveWheel() {
+    try { localStorage.setItem(wheelKey, JSON.stringify(wheelItems)); } catch {}
+}
+function renderWheelPicker() {
+    const query = wheelSearch.value.trim().toLowerCase();
+    const filtered = rows.filter(row => wheelLevelData(row).name.toLowerCase().includes(query));
+    wheelPicker.replaceChildren();
+    filtered.slice(0, 80).forEach(row => {
+        const item = wheelLevelData(row);
+        const label = document.createElement("label");
+        label.className = "pf-wheel-option";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = item.name;
+        checkbox.checked = wheelItems.some(chosen => chosen.name === item.name);
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) addWheelItem(item);
+            else removeWheelItem(item.name);
+        });
+        const text = document.createElement("span");
+        text.textContent = item.rank + " " + item.name;
+        label.append(checkbox, text);
+        wheelPicker.append(label);
+    });
+    if (!filtered.length) {
+        const empty = document.createElement("p");
+        empty.className = "pf-wheel-picker-empty";
+        empty.textContent = "No matching levels.";
+        wheelPicker.append(empty);
+    }
+}
+function addWheelItem(item) {
+    if (wheelItems.some(chosen => chosen.name === item.name) || wheelItems.length >= 200) return;
+    wheelItems.push(item);
+    saveWheel(); renderWheelPicker(); renderWheelChosen(); drawWheel();
+}
+function removeWheelItem(name) {
+    wheelItems = wheelItems.filter(item => item.name !== name);
+    saveWheel(); renderWheelPicker(); renderWheelChosen(); drawWheel();
+}
+function renderWheelChosen() {
+    wheelChosen.replaceChildren();
+    wheelItems.forEach(item => {
+        const li = document.createElement("li");
+        const name = document.createElement("span");
+        name.textContent = item.rank + " " + item.name;
+        const remove = document.createElement("button");
+        remove.type = "button"; remove.textContent = "×";
+        remove.setAttribute("aria-label", "Remove " + item.name);
+        remove.addEventListener("click", () => removeWheelItem(item.name));
+        li.append(name, remove); wheelChosen.append(li);
+    });
+    wheelCount.textContent = wheelItems.length + (wheelItems.length === 1 ? " level" : " levels");
+    spinButton.disabled = wheelItems.length < 2 || wheelSpinning;
+    wheelEmpty.style.display = wheelItems.length ? "none" : "grid";
+}
+function drawWheel() {
+    const dpr = window.devicePixelRatio || 1;
+    const size = 520;
+    wheelCanvas.width = size * dpr; wheelCanvas.height = size * dpr;
+    wheelCanvas.style.width = "min(100%, 420px)";
+    wheelCanvas.style.height = "auto";
+    wheelCtx.setTransform(dpr,0,0,dpr,0,0);
+    const cx=size/2, cy=size/2, radius=245;
+    wheelCtx.clearRect(0,0,size,size);
+    if (!wheelItems.length) {
+        wheelCtx.beginPath(); wheelCtx.arc(cx,cy,radius,0,Math.PI*2);
+        wheelCtx.fillStyle="#101c30"; wheelCtx.fill();
+        wheelCtx.lineWidth=8; wheelCtx.strokeStyle="#2e4769"; wheelCtx.stroke();
+        wheelCtx.fillStyle="#a8c1de"; wheelCtx.font="700 20px system-ui"; wheelCtx.textAlign="center";
+        wheelCtx.fillText("Your levels go here",cx,cy); return;
+    }
+    const slice=Math.PI*2/wheelItems.length;
+    wheelItems.forEach((item,index)=>{
+        const start=wheelAngle+index*slice, end=start+slice;
+        wheelCtx.beginPath(); wheelCtx.moveTo(cx,cy); wheelCtx.arc(cx,cy,radius,start,end); wheelCtx.closePath();
+        wheelCtx.fillStyle=wheelColors[index%wheelColors.length]; wheelCtx.fill();
+        wheelCtx.strokeStyle="rgba(8,13,24,.8)"; wheelCtx.lineWidth=2; wheelCtx.stroke();
+        if (wheelItems.length <= 36) {
+            wheelCtx.save(); wheelCtx.translate(cx,cy); wheelCtx.rotate(start+slice/2);
+            wheelCtx.textAlign="right"; wheelCtx.fillStyle="#fff";
+            wheelCtx.font="700 "+(wheelItems.length>22?10:wheelItems.length>12?12:14)+"px system-ui";
+            let label=item.name;
+            const maxChars=wheelItems.length>22?15:wheelItems.length>12?20:25;
+            if(label.length>maxChars) label=label.slice(0,maxChars-1)+"…";
+            wheelCtx.shadowColor="rgba(0,0,0,.45)"; wheelCtx.shadowBlur=3;
+            wheelCtx.fillText(label,radius-18,4); wheelCtx.restore();
+        }
+    });
+    wheelCtx.beginPath(); wheelCtx.arc(cx,cy,30,0,Math.PI*2); wheelCtx.fillStyle="#08111f"; wheelCtx.fill();
+    wheelCtx.lineWidth=4; wheelCtx.strokeStyle="#a8e9ff"; wheelCtx.stroke();
+    wheelCtx.fillStyle="#eaf9ff"; wheelCtx.font="800 13px system-ui"; wheelCtx.textAlign="center";
+    wheelCtx.fillText("PF",cx,cy+5);
+}
+function spinWheel() {
+    if (wheelSpinning || wheelItems.length < 2) return;
+    wheelSpinning = true; spinButton.disabled = true; wheelResult.textContent = "Spinning…";
+    const startAngle=wheelAngle, extraTurns=(5+Math.random()*4)*Math.PI*2, randomOffset=Math.random()*Math.PI*2;
+    const duration=4200, startTime=performance.now();
+    function frame(now) {
+        const progress=Math.min(1,(now-startTime)/duration);
+        const eased=1-Math.pow(1-progress,4);
+        wheelAngle=startAngle+extraTurns*eased+randomOffset*eased;
+        drawWheel();
+        if(progress<1) requestAnimationFrame(frame);
+        else {
+            const slice=Math.PI*2/wheelItems.length;
+            const pointerAngle=-Math.PI/2;
+            let relative=(pointerAngle-wheelAngle)%(Math.PI*2);
+            if(relative<0) relative+=Math.PI*2;
+            const winner=wheelItems[Math.floor(relative/slice)%wheelItems.length];
+            wheelResult.textContent="🎉 Selected: "+winner.name+" ("+winner.rank+")";
+            wheelSpinning=false; spinButton.disabled=wheelItems.length<2;
+        }
+    }
+    requestAnimationFrame(frame);
+}
+wheelSearch.addEventListener("input",renderWheelPicker);
+document.getElementById("pf-add-selected").addEventListener("click",()=>{
+    wheelPicker.querySelectorAll('input[type="checkbox"]:checked').forEach(box=>{
+        const row=rows.find(candidate=>wheelLevelData(candidate).name===box.value);
+        if(row) addWheelItem(wheelLevelData(row));
+    });
+});
+document.getElementById("pf-add-visible").addEventListener("click",()=>{
+    const query=wheelSearch.value.trim().toLowerCase();
+    rows.filter(row=>wheelLevelData(row).name.toLowerCase().includes(query)).slice(0,80).forEach(row=>addWheelItem(wheelLevelData(row)));
+});
+document.getElementById("pf-wheel-clear").addEventListener("click",()=>{
+    wheelItems=[]; wheelResult.textContent="Your result will appear here.";
+    saveWheel(); renderWheelPicker(); renderWheelChosen(); drawWheel();
+});
+spinButton.addEventListener("click",spinWheel);
+window.addEventListener("resize",drawWheel);
+
+loadWheel();
 updateRows();
 </script>
 </body>
