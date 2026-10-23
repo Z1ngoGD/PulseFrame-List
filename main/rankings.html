@@ -38,6 +38,11 @@
 @media(max-width:800px){.feature-grid{grid-template-columns:1fr}.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.rankings-wrap{margin-top:22px;padding:0 12px}.rankings-hero{padding:23px 18px}.mode-grid{grid-template-columns:1fr 1fr}.rank-table-head,.rank-row{grid-template-columns:36px minmax(100px,1fr) 75px;gap:7px;padding:12px 8px}.rank-table-head span:nth-child(3),.rank-row .rank-hardest{display:none}.rank-points{text-align:right}.rank-table-head span:last-child{text-align:right}.rank-player{gap:7px}.rank-avatar{width:32px;height:32px}}
 </style>
+
+<style>
+.pf-quick-menu{position:absolute;right:18px;top:calc(100% + 8px);z-index:1000;width:min(290px,calc(100vw - 28px));padding:8px;background:#0c1424;border:1px solid #263b5a;border-radius:14px;box-shadow:0 18px 48px #0009}
+.pf-quick-menu[hidden]{display:none!important}.pf-quick-menu a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:9px;color:#eaf4ff;text-decoration:none}.pf-quick-menu a:hover{background:#172743}.pf-quick-menu a>span:first-child{width:25px;text-align:center;font-size:18px}.pf-quick-menu strong,.pf-quick-menu small{display:block}.pf-quick-menu strong{font-size:13px}.pf-quick-menu small{margin-top:3px;color:#8fa7c5;font-size:11px}.site-header{position:relative}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -45,6 +50,13 @@
 <nav><a href="../index.html">Home</a><a href="rankings.html" aria-current="page">Rankings</a><a href="progression.html">Progression</a>
         <a href="../time-machine.html">Time Machine</a><a href="levels.html">Levels</a><a href="profile.html" class="profile-nav-icon" aria-label="Profile" title="Profile"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"></circle><path d="M4.5 20c.7-4 3.2-6 7.5-6s6.8 2 7.5 6"></path></svg></a></nav>
 <button class="menu-button" aria-label="Open menu">☰</button>
+
+<div class="pf-quick-menu" id="pf-quick-menu" hidden>
+  <a href="profile.html"><span>◉</span><span><strong>Profile</strong><small>View your profile</small></span></a>
+  <a href="profile.html#settings"><span>⚙</span><span><strong>Settings</strong><small>Profile and preferences</small></span></a>
+  <a href="levels.html#randomizer-wheel"><span>🎡</span><span><strong>Randomizer Wheel</strong><small>Pick levels at random</small></span></a>
+  <a href="time-machine.html"><span>⏳</span><span><strong>Time Machine</strong><small>Explore previous rankings</small></span></a>
+</div>
 </header>
 <main class="rankings-wrap">
 <section class="rankings-hero">
@@ -99,6 +111,10 @@ function renderPlayers(){
 }
 function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 search.addEventListener('input',renderPlayers);sort.addEventListener('change',renderPlayers);renderPlayers();
+</script>
+
+<script>
+(()=>{const b=document.querySelector('.site-header .menu-button');const m=document.getElementById('pf-quick-menu');if(!b||!m)return;b.setAttribute('aria-controls','pf-quick-menu');b.setAttribute('aria-expanded','false');b.addEventListener('click',e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden));});m.addEventListener('click',e=>{if(e.target.closest('a')){m.hidden=true;b.setAttribute('aria-expanded','false');}});document.addEventListener('click',e=>{if(!m.contains(e.target)&&e.target!==b){m.hidden=true;b.setAttribute('aria-expanded','false');}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.hidden=true;b.setAttribute('aria-expanded','false');}});})();
 </script>
 </body>
 </html>
