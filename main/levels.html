@@ -668,6 +668,21 @@ body {
 @media(prefers-reduced-motion:reduce){.pf-spin-button,.pf-wheel-secondary,.pf-wheel-clear{transition:none}}
 </style>
 
+
+<style>
+.pf-quick-menu{position:absolute;z-index:1200;top:calc(100% + 8px);right:14px;width:min(290px,calc(100vw - 28px));padding:8px;border:1px solid #304b6b;border-radius:15px;background:rgba(10,19,33,.98);box-shadow:0 18px 48px rgba(0,0,0,.48);backdrop-filter:blur(14px)}
+.pf-quick-menu[hidden]{display:none!important}
+header{position:relative;z-index:1100}
+.pf-quick-menu a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;color:#d9eaff;text-decoration:none}
+.pf-quick-menu a:hover,.pf-quick-menu a:focus-visible{background:rgba(60,137,205,.18);outline:none}
+.pf-quick-menu a>span:first-child{display:grid;place-items:center;width:36px;height:36px;border:1px solid #2f5277;border-radius:10px;background:#142740;color:#72d9ff;font-size:18px;flex-shrink:0}
+.pf-quick-menu strong,.pf-quick-menu small{display:block}
+.pf-quick-menu strong{font-size:13px}
+.pf-quick-menu small{margin-top:3px;color:#8fa6c2;font-size:11px}
+#pf-menu-button{cursor:pointer}
+@media(min-width:701px){.pf-quick-menu{top:calc(100% + 5px)}}
+</style>
+
 </head>
 
 <body>
@@ -681,6 +696,12 @@ body {
         <a href="levels.html" class="active">Levels</a>
         <a href="profile.html" class="profile-nav-icon" aria-label="Profile" title="Profile"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"></circle><path d="M4.5 20c.7-4 3.2-6 7.5-6s6.8 2 7.5 6"></path></svg></a>
     </nav>
+    <button class="menu-button" id="pf-menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="pf-quick-menu">☰</button>
+    <div class="pf-quick-menu" id="pf-quick-menu" hidden>
+        <a href="profile.html"><span>◉</span><span><strong>Profile</strong><small>View your profile</small></span></a>
+        <a href="profile.html#settings"><span>⚙</span><span><strong>Settings</strong><small>Profile and preferences</small></span></a>
+        <a href="#randomizer-wheel" id="pf-menu-wheel-link"><span>🎡</span><span><strong>Randomizer Wheel</strong><small>Pick levels at random</small></span></a>
+    </div>
 </header>
 
 <main class="levels-page">
@@ -2940,6 +2961,35 @@ document.getElementById("pf-wheel-clear").addEventListener("click",()=>{
 });
 spinButton.addEventListener("click",spinWheel);
 window.addEventListener("resize",drawWheel);
+
+
+const quickMenuButton = document.getElementById("pf-menu-button");
+const quickMenu = document.getElementById("pf-quick-menu");
+quickMenuButton.addEventListener("click", () => {
+    const opening = quickMenu.hidden;
+    quickMenu.hidden = !opening;
+    quickMenuButton.setAttribute("aria-expanded", String(opening));
+    quickMenuButton.setAttribute("aria-label", opening ? "Close menu" : "Open menu");
+});
+document.addEventListener("click", event => {
+    if (!quickMenu.hidden && !quickMenu.contains(event.target) && !quickMenuButton.contains(event.target)) {
+        quickMenu.hidden = true;
+        quickMenuButton.setAttribute("aria-expanded", "false");
+        quickMenuButton.setAttribute("aria-label", "Open menu");
+    }
+});
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        quickMenu.hidden = true;
+        quickMenuButton.setAttribute("aria-expanded", "false");
+        quickMenuButton.setAttribute("aria-label", "Open menu");
+    }
+});
+document.getElementById("pf-menu-wheel-link").addEventListener("click", () => {
+    quickMenu.hidden = true;
+    quickMenuButton.setAttribute("aria-expanded", "false");
+    document.getElementById("randomizer-wheel").scrollIntoView({behavior:"smooth",block:"start"});
+});
 
 loadWheel();
 updateRows();
